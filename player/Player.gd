@@ -30,6 +30,9 @@ var floor_h_weight = 0.5
 func _physics_process(delta):
 	apply_gravity(delta)
 	update_movement()
+	
+	update_move_direction()
+	update_flip()
 
 func check_is_on_floor():
 	return is_on_floor()
