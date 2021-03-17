@@ -14,9 +14,9 @@ var floor_normal = Vector2.UP
 var wall_jump_velocity = Vector2(120, -210)
 
 var gravity = 1000
-var acc = 1000
-var max_speed = 90
-var jump_force = 275
+var acc = 1800
+var max_speed = 100
+var jump_force = 270
 
 var move_direction = 1
 var wall_direction = 1
