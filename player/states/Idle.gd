@@ -8,3 +8,5 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Run")
 	elif InputManager.just_pressed_up:
 		state_machine.transition_to("Jump")
+	elif player.check_is_on_floor() == false:
+		state_machine.transition_to("Fall")
