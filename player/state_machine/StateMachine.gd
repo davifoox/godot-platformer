@@ -4,7 +4,7 @@ class_name StateMachine
 extends Node
 
 # Emitted when transitioning to a new state.
-signal transitioned(state_name)
+signal transitioned(state_name, previous_state_name)
 
 export var initial_state := NodePath()
 
@@ -42,4 +42,4 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter(msg)
-	emit_signal("transitioned", state.name)
+	emit_signal("transitioned", state.name, last_state_name)
