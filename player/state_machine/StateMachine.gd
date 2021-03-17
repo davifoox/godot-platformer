@@ -9,6 +9,7 @@ signal transitioned(state_name)
 export var initial_state := NodePath()
 
 onready var state: State = get_node(initial_state)
+onready var last_state_name: String
 
 
 func _ready() -> void:
@@ -35,7 +36,9 @@ func _physics_process(delta: float) -> void:
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_name):
 		return
-
+	
+	print(target_state_name)
+	last_state_name = state.name
 	state.exit()
 	state = get_node(target_state_name)
 	state.enter(msg)

@@ -10,9 +10,19 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "PlayerState",
+"class": "Fall",
+"language": "GDScript",
+"path": "res://player/states/Fall.gd"
+}, {
+"base": "PlayerState",
 "class": "Idle",
 "language": "GDScript",
 "path": "res://player/states/Idle.gd"
+}, {
+"base": "PlayerState",
+"class": "Jump",
+"language": "GDScript",
+"path": "res://player/states/Jump.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -22,7 +32,12 @@ _global_script_classes=[ {
 "base": "State",
 "class": "PlayerState",
 "language": "GDScript",
-"path": "res://player/PlayerState.gd"
+"path": "res://player/state_machine/PlayerState.gd"
+}, {
+"base": "PlayerState",
+"class": "Run",
+"language": "GDScript",
+"path": "res://player/states/Run.gd"
 }, {
 "base": "Node",
 "class": "State",
@@ -35,9 +50,12 @@ _global_script_classes=[ {
 "path": "res://player/state_machine/StateMachine.gd"
 } ]
 _global_script_class_icons={
+"Fall": "",
 "Idle": "",
+"Jump": "",
 "Player": "",
 "PlayerState": "",
+"Run": "",
 "State": "",
 "StateMachine": ""
 }
@@ -47,6 +65,10 @@ _global_script_class_icons={
 config/name="godot-platformer"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+InputManager="*res://singletons/InputManager.gd"
 
 [display]
 
@@ -78,6 +100,28 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+
+[input]
+
+left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [layer_names]
