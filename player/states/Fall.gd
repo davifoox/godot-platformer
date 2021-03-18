@@ -9,6 +9,7 @@ func enter(_msg := {}) -> void:
 	else:
 		air_h_weight = player.air_h_weight_regular
 	if state_machine.last_state_name == "Run":
+		player.velocity.y = 0
 		player.coyote_timer.start()
 
 func physics_update(delta: float) -> void:

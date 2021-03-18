@@ -15,6 +15,7 @@ func physics_update(delta: float) -> void:
 	if !InputManager.pressing_up:
 		player.velocity.y *= 0.5
 		
+		
 	if player.velocity.y >= 0:
 		state_machine.transition_to("Fall")
 	elif player.wall_direction != 0 and player.wall_slide_cooldown.is_stopped():
