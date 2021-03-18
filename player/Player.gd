@@ -29,7 +29,7 @@ var floor_h_weight = 0.5
 
 func _physics_process(delta):
 	#DEBUG
-	print(wall_direction)
+#	print(wall_direction)
 	
 	apply_gravity(delta)
 	update_wall_direction()
