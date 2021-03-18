@@ -48,6 +48,16 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://player/state_machine/StateMachine.gd"
+}, {
+"base": "PlayerState",
+"class": "WallJump",
+"language": "GDScript",
+"path": "res://player/states/WallJump.gd"
+}, {
+"base": "PlayerState",
+"class": "WallSlide",
+"language": "GDScript",
+"path": "res://player/states/WallSlide.gd"
 } ]
 _global_script_class_icons={
 "Fall": "",
@@ -57,7 +67,9 @@ _global_script_class_icons={
 "PlayerState": "",
 "Run": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"WallJump": "",
+"WallSlide": ""
 }
 
 [application]
