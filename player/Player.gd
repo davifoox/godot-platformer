@@ -30,7 +30,11 @@ var air_h_weight = air_h_weight_regular
 var floor_h_weight = 0.5
 
 var hook = null
-var retract_force = 1000
+var retract_force = 1250#1000
+
+func _draw():
+	if state_machine.state.name == "Swing":
+		draw_line(Vector2(), to_local(hook.position), Color("282828"), 2, false)
 
 func _physics_process(delta):
 	#DEBUG
@@ -38,6 +42,8 @@ func _physics_process(delta):
 #		print(hook.name)
 #	else:
 #		print("null")
+	
+	update() #draw
 	
 	apply_gravity(delta)
 	update_wall_direction()
@@ -53,10 +59,10 @@ func update_move_direction():
 func update_flip():
 	if move_direction == 1:
 		sprite.flip_h = false
-		hook_detection.position = Vector2(22,-22)
+		hook_detection.position = Vector2(30,0)
 	elif move_direction == -1:
 		sprite.flip_h = true
-		hook_detection.position = Vector2(-22,-22)
+		hook_detection.position = Vector2(-30,0)
 		
 		
 func _check_is_valid_wall(wall_raycasts):
@@ -96,7 +102,10 @@ func update_movement():
 func _on_HookDetection_area_entered(area):
 	if hook != area and state_machine.state.name != "Swing":
 		hook = area
+		hook.activate() #colocar isso em outro objeto HookTarget seila 
 
 func _on_HookDetection_area_exited(area):
+	if hook != null:
+		hook.deactivate()
 	if hook == area and state_machine.state.name != "Swing":
 		hook = null

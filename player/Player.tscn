@@ -14,8 +14,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 22.0227
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 25.0
+height = 132.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -102,7 +103,8 @@ one_shot = true
 [node name="JumpBuffer" type="Timer" parent="Timers"]
 
 [node name="HookDetection" type="Area2D" parent="."]
-position = Vector2( 22, -22 )
+visible = false
+position = Vector2( 30, 0 )
 collision_layer = 0
 collision_mask = 4
 
