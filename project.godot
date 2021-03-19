@@ -84,8 +84,8 @@ InputManager="*res://singletons/InputManager.gd"
 
 [display]
 
-window/size/width=256
-window/size/height=144
+window/size/width=320
+window/size/height=180
 window/size/test_width=1024
 window/size/test_height=576
 window/stretch/mode="viewport"
