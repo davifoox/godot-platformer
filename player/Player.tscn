@@ -108,3 +108,5 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HookDetection"]
 shape = SubResource( 2 )
+[connection signal="area_entered" from="HookDetection" to="." method="_on_HookDetection_area_entered"]
+[connection signal="area_exited" from="HookDetection" to="." method="_on_HookDetection_area_exited"]

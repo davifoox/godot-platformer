@@ -9,6 +9,7 @@ onready var wall_jump_cooldown = $Timers/WallJumpCooldown
 onready var wall_slide_sticky_timer = $Timers/WallSlideStickyTimer
 onready var coyote_timer = $Timers/CoyoteTimer
 onready var hook_detection = $HookDetection
+onready var state_machine = $StateMachine
 
 var velocity = Vector2()
 var floor_normal = Vector2.UP
@@ -29,6 +30,7 @@ var air_h_weight = air_h_weight_regular
 var floor_h_weight = 0.5
 
 var hook = null
+var retract_force = 1000
 
 func _physics_process(delta):
 	#DEBUG
@@ -89,3 +91,12 @@ func update_movement():
 	velocity = move_and_slide(velocity, floor_normal)
 	
 # ------------------------------------------------------------------------------
+
+
+func _on_HookDetection_area_entered(area):
+	if hook != area and state_machine.state.name != "Swing":
+		hook = area
+
+func _on_HookDetection_area_exited(area):
+	if hook == area and state_machine.state.name != "Swing":
+		hook = null
