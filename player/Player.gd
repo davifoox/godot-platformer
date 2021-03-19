@@ -8,6 +8,7 @@ onready var wall_slide_cooldown = $Timers/WallSlideCooldown
 onready var wall_jump_cooldown = $Timers/WallJumpCooldown
 onready var wall_slide_sticky_timer = $Timers/WallSlideStickyTimer
 onready var coyote_timer = $Timers/CoyoteTimer
+onready var hook_detection = $HookDetection
 
 var velocity = Vector2()
 var floor_normal = Vector2.UP
@@ -27,9 +28,14 @@ var air_h_weight_after_wall_jump = 0.05
 var air_h_weight = air_h_weight_regular
 var floor_h_weight = 0.5
 
+var hook = null
+
 func _physics_process(delta):
 	#DEBUG
-#	print(wall_direction)
+#	if hook != null:
+#		print(hook.name)
+#	else:
+#		print("null")
 	
 	apply_gravity(delta)
 	update_wall_direction()
@@ -45,9 +51,12 @@ func update_move_direction():
 func update_flip():
 	if move_direction == 1:
 		sprite.flip_h = false
+		hook_detection.position = Vector2(22,-22)
 	elif move_direction == -1:
 		sprite.flip_h = true
-
+		hook_detection.position = Vector2(-22,-22)
+		
+		
 func _check_is_valid_wall(wall_raycasts):
 	for raycast in wall_raycasts.get_children():
 		if raycast.is_colliding():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/player.png" type="Texture" id=2]
@@ -9,9 +9,13 @@
 [ext_resource path="res://player/states/Fall.gd" type="Script" id=7]
 [ext_resource path="res://player/states/WallSlide.gd" type="Script" id=8]
 [ext_resource path="res://player/states/WallJump.gd" type="Script" id=9]
+[ext_resource path="res://player/states/Swing.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 22.0227
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -47,7 +51,11 @@ script = ExtResource( 8 )
 [node name="WallJump" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
+[node name="Swing" type="Node" parent="StateMachine"]
+script = ExtResource( 10 )
+
 [node name="WallRaycasts" type="Node2D" parent="."]
+visible = false
 
 [node name="LeftWallRaycasts" type="Node2D" parent="WallRaycasts"]
 
@@ -92,3 +100,11 @@ wait_time = 0.1
 one_shot = true
 
 [node name="JumpBuffer" type="Timer" parent="Timers"]
+
+[node name="HookDetection" type="Area2D" parent="."]
+position = Vector2( 22, -22 )
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HookDetection"]
+shape = SubResource( 2 )
