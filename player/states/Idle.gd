@@ -2,6 +2,7 @@ class_name Idle
 extends PlayerState
 
 func physics_update(delta: float) -> void:
+	player.apply_gravity(delta)
 	player.velocity.x = lerp(player.velocity.x, 0, player.floor_h_weight)
 
 	if InputManager.pressing_left or InputManager.pressing_right:

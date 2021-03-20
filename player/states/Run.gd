@@ -2,6 +2,7 @@ class_name Run
 extends PlayerState
 
 func physics_update(delta: float) -> void:
+	player.apply_gravity(delta)
 	if InputManager.pressing_left:
 		player.velocity.x = max(player.velocity.x - player.acc * delta, -player.max_speed)
 	elif InputManager.pressing_right:

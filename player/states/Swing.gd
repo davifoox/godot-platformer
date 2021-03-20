@@ -5,6 +5,7 @@ func enter(_msg := {}) -> void:
 	player.set_hook_detection_monitoring(false)
 
 func physics_update(delta: float) -> void:
+	player.apply_gravity(delta)
 	var radius = player.global_position - player.hook.position # points away from center
 	#if velocity.length() < 0.01 or radius.length() < 10: return
 	var angle = acos(radius.dot(player.velocity) / (radius.length() * player.velocity.length()))

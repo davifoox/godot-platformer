@@ -46,7 +46,6 @@ func _physics_process(delta):
 	
 	update() #draw
 	
-	apply_gravity(delta)
 	update_wall_direction()
 	update_move_direction()
 	update_flip()
@@ -75,6 +74,17 @@ func update_camera_h_position():
 	var speed = 0.025
 	if move_direction != 0 and wall_direction == 0:
 		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
+
+func check_is_on_ledge():
+	if wall_direction == 1:
+		if !right_wall_raycasts.get_child(0).is_colliding(): #upper raycast
+			if right_wall_raycasts.get_child(1).is_colliding(): #bottom raycast
+				return true
+	elif wall_direction == -1:
+		if !left_wall_raycasts.get_child(0).is_colliding(): #upper raycast
+			if left_wall_raycasts.get_child(1).is_colliding(): #bottom raycast
+				return true
+	return false
 
 func _check_is_valid_wall(wall_raycasts):
 	for raycast in wall_raycasts.get_children():

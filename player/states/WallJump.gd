@@ -12,9 +12,9 @@ func enter(_msg := {}) -> void:
 	player.wall_jump_cooldown.start()
 
 func physics_update(delta: float) -> void:
+	player.apply_gravity(delta)
 	if InputManager.just_released_up:
 		player.velocity *= 0.5
-		
 		
 	if player.wall_jump_cooldown.is_stopped():
 		state_machine.transition_to("Fall")

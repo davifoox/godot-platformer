@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://player/states/Fall.gd"
 }, {
 "base": "PlayerState",
+"class": "GrabLedge",
+"language": "GDScript",
+"path": "res://player/states/GrabLedge.gd"
+}, {
+"base": "PlayerState",
 "class": "Idle",
 "language": "GDScript",
 "path": "res://player/states/Idle.gd"
@@ -66,6 +71,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Fall": "",
+"GrabLedge": "",
 "Idle": "",
 "Jump": "",
 "Player": "",

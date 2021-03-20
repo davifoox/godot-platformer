@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/player.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://player/states/WallJump.gd" type="Script" id=9]
 [ext_resource path="res://player/states/Swing.gd" type="Script" id=10]
 [ext_resource path="res://player/AnimationPlayer.gd" type="Script" id=11]
+[ext_resource path="res://player/states/GrabLedge.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
@@ -119,6 +120,9 @@ script = ExtResource( 9 )
 
 [node name="Swing" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
+
+[node name="GrabLedge" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
