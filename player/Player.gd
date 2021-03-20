@@ -73,7 +73,7 @@ func update_hook_detection_h_position():
 
 func update_camera_h_position():
 	var speed = 0.025
-	if move_direction != 0:
+	if move_direction != 0 and wall_direction == 0:
 		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
 
 func _check_is_valid_wall(wall_raycasts):
@@ -119,6 +119,7 @@ func _on_HookDetection_area_exited(area):
 	if hook != null:
 		hook.deactivate()
 	if hook == area and state_machine.state.name != "Swing":
+		hook.deactivate()
 		hook = null
 
 func set_hook_detection_monitoring(value: bool):
