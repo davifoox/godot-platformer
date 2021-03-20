@@ -11,6 +11,7 @@ onready var coyote_timer = $Timers/CoyoteTimer
 onready var hook_detection = $HookDetection
 onready var state_machine = $StateMachine
 onready var camera = $Camera2D
+onready var ledge_collision = $LedgeCollision
 
 var velocity = Vector2()
 var floor_normal = Vector2.UP
@@ -48,15 +49,18 @@ func _physics_process(delta):
 	
 	update_wall_direction()
 	update_move_direction()
-	update_flip()
 	update_movement()
-	update_hook_detection_h_position()
-	update_camera_h_position()
+	
+	
 
 # Runs on all States -----------------------------------------------------------
 
 func update_move_direction():
 	move_direction = -int(InputManager.pressing_left) + int(InputManager.pressing_right)
+	update_flip()
+	update_hook_detection_h_position()
+	update_camera_h_position()
+	update_ledge_collision_h_position()
 
 func update_flip():
 	if move_direction == 1:
@@ -74,6 +78,13 @@ func update_camera_h_position():
 	var speed = 0.025
 	if move_direction != 0 and wall_direction == 0:
 		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
+
+func update_ledge_collision_h_position():
+	if move_direction != 0 and state_machine.state.name != "GrabLedge":
+		ledge_collision.position.x = abs(ledge_collision.position.x) * move_direction
+
+func activate_ledge_collision(value: bool):
+	ledge_collision.disabled = !value
 
 func check_is_on_ledge():
 	if wall_direction == 1:
