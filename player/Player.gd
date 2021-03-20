@@ -24,7 +24,7 @@ var move_direction = 1
 var wall_direction = 1
 
 var air_h_weight_regular = 0.5
-var air_h_weight_after_wall_jump = 0.05
+var air_h_weight_small = 0.05
 
 var air_h_weight = air_h_weight_regular
 var floor_h_weight = 0.5

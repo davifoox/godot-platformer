@@ -4,8 +4,8 @@ extends PlayerState
 var air_h_weight: float
 
 func enter(_msg := {}) -> void:
-	if state_machine.last_state_name == "WallJump":
-		air_h_weight = player.air_h_weight_after_wall_jump
+	if state_machine.last_state_name == "WallJump" or state_machine.last_state_name == "Swing":
+		air_h_weight = player.air_h_weight_small
 	else:
 		air_h_weight = player.air_h_weight_regular
 	if state_machine.last_state_name == "Run":
