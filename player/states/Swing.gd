@@ -2,7 +2,7 @@ class_name Swing
 extends PlayerState
 
 func enter(_msg := {}) -> void:
-	pass
+	player.set_hook_detection_monitoring(false)
 
 func physics_update(delta: float) -> void:
 	var radius = player.global_position - player.hook.position # points away from center
@@ -17,4 +17,5 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Fall")
 
 func exit() -> void:
+	player.set_hook_detection_monitoring(true)
 	player.hook = null

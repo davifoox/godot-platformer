@@ -10,6 +10,7 @@ onready var wall_slide_sticky_timer = $Timers/WallSlideStickyTimer
 onready var coyote_timer = $Timers/CoyoteTimer
 onready var hook_detection = $HookDetection
 onready var state_machine = $StateMachine
+onready var camera = $Camera2D
 
 var velocity = Vector2()
 var floor_normal = Vector2.UP
@@ -50,6 +51,8 @@ func _physics_process(delta):
 	update_move_direction()
 	update_flip()
 	update_movement()
+	update_hook_detection_h_position()
+	update_camera_h_position()
 
 # Runs on all States -----------------------------------------------------------
 
@@ -59,12 +62,20 @@ func update_move_direction():
 func update_flip():
 	if move_direction == 1:
 		sprite.flip_h = false
-		hook_detection.position = Vector2(30,0)
 	elif move_direction == -1:
 		sprite.flip_h = true
+		
+func update_hook_detection_h_position():
+	if move_direction == 1:
+		hook_detection.position = Vector2(30,0)
+	elif move_direction == -1:
 		hook_detection.position = Vector2(-30,0)
-		
-		
+
+func update_camera_h_position():
+	var speed = 0.025
+	if move_direction != 0:
+		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
+
 func _check_is_valid_wall(wall_raycasts):
 	for raycast in wall_raycasts.get_children():
 		if raycast.is_colliding():
@@ -109,3 +120,9 @@ func _on_HookDetection_area_exited(area):
 		hook.deactivate()
 	if hook == area and state_machine.state.name != "Swing":
 		hook = null
+
+func set_hook_detection_monitoring(value: bool):
+	hook_detection.monitoring = value
+
+
+	
