@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/player.png" type="Texture" id=2]
@@ -10,9 +10,44 @@
 [ext_resource path="res://player/states/WallSlide.gd" type="Script" id=8]
 [ext_resource path="res://player/states/WallJump.gd" type="Script" id=9]
 [ext_resource path="res://player/states/Swing.gd" type="Script" id=10]
+[ext_resource path="res://player/AnimationPlayer.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Run"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7, 8, 9 ]
+}
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 25.0
@@ -29,6 +64,7 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+hframes = 10
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -54,6 +90,11 @@ script = ExtResource( 9 )
 
 [node name="Swing" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 3 )
+anims/Run = SubResource( 4 )
+script = ExtResource( 11 )
 
 [node name="WallRaycasts" type="Node2D" parent="."]
 visible = false
@@ -110,5 +151,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HookDetection"]
 shape = SubResource( 2 )
+[connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="area_entered" from="HookDetection" to="." method="_on_HookDetection_area_entered"]
 [connection signal="area_exited" from="HookDetection" to="." method="_on_HookDetection_area_exited"]
