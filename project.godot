@@ -88,7 +88,7 @@ _global_script_class_icons={
 
 config/name="godot-platformer"
 run/main_scene="res://scenes/Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://sprites/icon-512x512.png"
 
 [display]
 
