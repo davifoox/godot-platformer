@@ -90,6 +90,10 @@ config/name="godot-platformer"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://sprites/icon-512x512.png"
 
+[autoload]
+
+GameEvents="*res://singletons/GameEvents.gd"
+
 [display]
 
 window/size/width=320

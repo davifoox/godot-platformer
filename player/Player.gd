@@ -10,7 +10,6 @@ onready var ledge_collision: CollisionShape2D = $LedgeCollision
 onready var camera: Camera2D = $Camera2D
 onready var wall_slide_cooldown: Timer = $Timers/WallSlideCooldown
 onready var wall_jump_cooldown: Timer = $Timers/WallJumpCooldown
-onready var wall_slide_sticky_timer: Timer = $Timers/WallSlideStickyTimer
 onready var coyote_timer: Timer = $Timers/CoyoteTimer
 onready var jump_buffer: Timer = $Timers/JumpBuffer
 
@@ -46,6 +45,8 @@ func _physics_process(delta):
 	update_wall_direction()
 	update_move_direction()
 	update_movement()
+	if check_passing_vertical_limit() == true:
+		die()
 
 # Runs on all States -----------------------------------------------------------
 
@@ -119,6 +120,15 @@ func _check_is_valid_wall(wall_raycasts) -> bool:
 	
 func check_is_on_floor() -> bool:
 	return is_on_floor()
+
+func check_passing_vertical_limit() -> bool:
+	print(position.y)
+	if position.y > 200:
+		return true
+	return false
+
+func die():
+	GameEvents.emit_signal("player_died")
 
 # ------------------------------------------------------------------------------
 
