@@ -13,6 +13,7 @@ func physics_update(delta: float) -> void:
 	elif Input.is_action_just_pressed("down"):
 		state_machine.transition_to("WallSlide")
 
+
 func exit() -> void:
 	player.wall_slide_cooldown.start()
 	player.activate_ledge_collision(false)

@@ -43,12 +43,9 @@ func _physics_process(delta):
 	#DEBUG
 	
 	update() #draw
-	
 	update_wall_direction()
 	update_move_direction()
 	update_movement()
-	
-	
 
 # Runs on all States -----------------------------------------------------------
 

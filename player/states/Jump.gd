@@ -20,8 +20,8 @@ func physics_update(delta: float) -> void:
 	
 	if player.velocity.y >= 0:
 		state_machine.transition_to("Fall")
-#	elif player.wall_direction != 0 and player.wall_slide_cooldown.is_stopped():
-#		state_machine.transition_to("WallSlide")
+	elif player.wall_direction != 0 and player.wall_slide_cooldown.is_stopped():
+		state_machine.transition_to("WallSlide")
 	elif player.hook != null and Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Swing")
 		
