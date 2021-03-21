@@ -17,7 +17,7 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Fall")
 	elif Input.is_action_just_pressed("action1"):# or !player.jump_buffer.is_stopped():
 		state_machine.transition_to("WallJump")
-	elif player.check_is_on_ledge() == true and player.velocity.y > 0:
+	elif player.check_is_on_ledge() == true and player.velocity.y > 0 and player.check_close_to_floor() == false:
 		state_machine.transition_to("GrabLedge")
 		
 func exit() -> void:
