@@ -14,7 +14,7 @@ func physics_update(delta: float) -> void:
 	
 	player.velocity += (player.hook.position - player.global_position).normalized() * player.retract_force * delta
 	
-	if InputManager.just_released_up:
+	if Input.is_action_just_released("action1"):
 		state_machine.transition_to("Fall")
 
 func exit() -> void:

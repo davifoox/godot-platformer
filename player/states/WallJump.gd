@@ -13,13 +13,13 @@ func enter(_msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)
-	if InputManager.just_released_up:
+	if Input.is_action_just_released("action1"):
 		player.velocity *= 0.5
 		
 	if player.wall_jump_cooldown.is_stopped():
 		state_machine.transition_to("Fall")
 	if player.check_is_on_floor():
-		if InputManager.pressing_left or InputManager.pressing_right:
+		if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
 			state_machine.transition_to("Run")
 		else:
 			state_machine.transition_to("Idle")

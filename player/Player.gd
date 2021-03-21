@@ -12,6 +12,7 @@ onready var hook_detection = $HookDetection
 onready var state_machine = $StateMachine
 onready var camera = $Camera2D
 onready var ledge_collision = $LedgeCollision
+onready var jump_buffer: Timer = $Timers/JumpBuffer
 
 var velocity = Vector2()
 var floor_normal = Vector2.UP
@@ -40,10 +41,6 @@ func _draw():
 
 func _physics_process(delta):
 	#DEBUG
-#	if hook != null:
-#		print(hook.name)
-#	else:
-#		print("null")
 	
 	update() #draw
 	
@@ -56,13 +53,15 @@ func _physics_process(delta):
 # Runs on all States -----------------------------------------------------------
 
 func update_move_direction():
-	move_direction = -int(InputManager.pressing_left) + int(InputManager.pressing_right)
+	move_direction = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
 	update_flip()
 	update_hook_detection_h_position()
 	update_camera_h_position()
 	update_ledge_collision_h_position()
 
 func update_flip():
+	if state_machine.state.name == "GrabLedge":
+		return
 	if move_direction == 1:
 		sprite.flip_h = false
 	elif move_direction == -1:
@@ -81,7 +80,10 @@ func update_camera_h_position():
 
 func update_ledge_collision_h_position():
 	if move_direction != 0 and state_machine.state.name != "GrabLedge":
-		ledge_collision.position.x = abs(ledge_collision.position.x) * move_direction
+		if move_direction == 1:
+			ledge_collision.position = Vector2(6,-13)
+		elif move_direction == -1:
+			ledge_collision.position = Vector2(-6,-13)
 
 func activate_ledge_collision(value: bool):
 	ledge_collision.disabled = !value

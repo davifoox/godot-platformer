@@ -3,11 +3,12 @@ extends PlayerState
 
 func enter(_msg := {}) -> void:
 	player.activate_ledge_collision(true)
+	player.velocity.x = 0
 	
 func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)
 	
-	if InputManager.just_pressed_up:
+	if Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Jump")
 
 func exit() -> void:
