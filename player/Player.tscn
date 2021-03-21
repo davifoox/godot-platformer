@@ -227,10 +227,6 @@ one_shot = true
 wait_time = 0.25
 one_shot = true
 
-[node name="WallSlideStickyTimer" type="Timer" parent="Timers"]
-wait_time = 0.15
-one_shot = true
-
 [node name="CoyoteTimer" type="Timer" parent="Timers"]
 wait_time = 0.1
 one_shot = true

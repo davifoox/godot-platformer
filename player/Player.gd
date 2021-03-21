@@ -1,18 +1,18 @@
 class_name Player
 extends KinematicBody2D
 
+onready var state_machine: StateMachine = $StateMachine
 onready var left_wall_raycasts: Node2D = $WallRaycasts/LeftWallRaycasts
 onready var right_wall_raycasts: Node2D = $WallRaycasts/RightWallRaycasts
 onready var sprite: Sprite = $Sprite
+onready var hook_detection: Area2D = $HookDetection
+onready var ledge_collision: CollisionShape2D = $LedgeCollision
+onready var camera: Camera2D = $Camera2D
 onready var wall_slide_cooldown: Timer = $Timers/WallSlideCooldown
 onready var wall_jump_cooldown: Timer = $Timers/WallJumpCooldown
 onready var wall_slide_sticky_timer: Timer = $Timers/WallSlideStickyTimer
 onready var coyote_timer: Timer = $Timers/CoyoteTimer
 onready var jump_buffer: Timer = $Timers/JumpBuffer
-onready var hook_detection: Area2D = $HookDetection
-onready var ledge_collision: CollisionShape2D = $LedgeCollision
-onready var state_machine: StateMachine = $StateMachine
-onready var camera: Camera2D = $Camera2D
 
 var velocity = Vector2()
 var floor_normal = Vector2.UP
@@ -49,14 +49,21 @@ func _physics_process(delta):
 
 # Runs on all States -----------------------------------------------------------
 
-func update_move_direction():
+func apply_gravity(delta) -> void:
+	velocity.y += gravity * delta
+	velocity.y = clamp(velocity.y, -gravity, gravity * 0.3)
+
+func update_movement() -> void:
+	velocity = move_and_slide(velocity, floor_normal)
+
+func update_move_direction() -> void:
 	move_direction = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
 	update_flip()
 	update_hook_detection_h_position()
 	update_camera_h_position()
 	update_ledge_collision_h_position()
 
-func update_flip():
+func update_flip() -> void:
 	if state_machine.state.name == "GrabLedge":
 		return
 	if move_direction == 1:
@@ -64,28 +71,28 @@ func update_flip():
 	elif move_direction == -1:
 		sprite.flip_h = true
 		
-func update_hook_detection_h_position():
+func update_hook_detection_h_position() -> void:
 	if move_direction == 1:
 		hook_detection.position = Vector2(30,0)
 	elif move_direction == -1:
 		hook_detection.position = Vector2(-30,0)
 
-func update_camera_h_position():
+func update_camera_h_position() -> void:
 	var speed = 0.025
 	if move_direction != 0 and wall_direction == 0:
 		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
 
-func update_ledge_collision_h_position():
+func update_ledge_collision_h_position() -> void:
 	if move_direction != 0 and state_machine.state.name != "GrabLedge":
 		if move_direction == 1:
 			ledge_collision.position = Vector2(6,-13)
 		elif move_direction == -1:
 			ledge_collision.position = Vector2(-6,-13)
 
-func activate_ledge_collision(value: bool):
+func activate_ledge_collision(value: bool) -> void:
 	ledge_collision.disabled = !value
 
-func check_is_on_ledge():
+func check_is_on_ledge() -> bool:
 	if wall_direction == 1:
 		if !right_wall_raycasts.get_child(0).is_colliding(): #upper raycast
 			if right_wall_raycasts.get_child(1).is_colliding(): #bottom raycast
@@ -96,39 +103,24 @@ func check_is_on_ledge():
 				return true
 	return false
 
-func _check_is_valid_wall(wall_raycasts):
-	for raycast in wall_raycasts.get_children():
-		if raycast.is_colliding():
-			return true
-	return false
-
-func update_wall_direction():
+func update_wall_direction() -> void:
 	var is_near_wall_left = _check_is_valid_wall(left_wall_raycasts)
 	var is_near_wall_right = _check_is_valid_wall(right_wall_raycasts)
 	if is_near_wall_left and is_near_wall_right:
 		wall_direction = move_direction
 	else:
 		wall_direction = -int(is_near_wall_left) + int(is_near_wall_right)
-
-#func handle_wall_slide_sticking():
-#	if move_direction != 0 and move_direction != wall_direction:
-#		if wall_slide_sticky_timer.is_stopped():
-#			wall_slide_sticky_timer.start()
-#	else:
-#		wall_slide_sticky_timer.stop()
-
-func check_is_on_floor():
+		
+func _check_is_valid_wall(wall_raycasts) -> bool:
+	for raycast in wall_raycasts.get_children():
+		if raycast.is_colliding():
+			return true
+	return false
+	
+func check_is_on_floor() -> bool:
 	return is_on_floor()
 
-func apply_gravity(delta):
-	velocity.y += gravity * delta
-	velocity.y = clamp(velocity.y, -gravity, gravity * 0.3)
-
-func update_movement():
-	velocity = move_and_slide(velocity, floor_normal)
-	
 # ------------------------------------------------------------------------------
-
 
 func _on_HookDetection_area_entered(area):
 	if hook != area and state_machine.state.name != "Swing":
@@ -144,6 +136,3 @@ func _on_HookDetection_area_exited(area):
 
 func set_hook_detection_monitoring(value: bool):
 	hook_detection.monitoring = value
-
-
-	
