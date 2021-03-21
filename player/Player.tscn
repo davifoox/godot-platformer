@@ -148,8 +148,9 @@ disabled = true
 texture = ExtResource( 2 )
 hframes = 15
 
-[node name="SpriteTarget" type="Sprite" parent="."]
+[node name="TargetFinder" type="Sprite" parent="."]
 visible = false
+z_index = 1
 texture = ExtResource( 13 )
 script = ExtResource( 14 )
 
@@ -249,5 +250,8 @@ one_shot = true
 limit_top = 0
 limit_bottom = 180
 offset_h = 1.0
+[connection signal="hook_found" from="TargetFinder" to="." method="_on_TargetFinder_hook_found"]
+[connection signal="hook_lost" from="TargetFinder" to="." method="_on_TargetFinder_hook_lost"]
 [connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]

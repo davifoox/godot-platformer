@@ -34,9 +34,9 @@ var floor_h_weight = 0.5
 var hook = null
 var retract_force = 1250#1000
 
-#func _draw():
-#	if state_machine.state.name == "Swing":
-#		draw_line(Vector2(), to_local(hook.position), Color("282828"), 2, false)
+func _draw():
+	if state_machine.state.name == "Swing":
+		draw_line(Vector2(), to_local(hook.position), Color("282828"), 2, false)
 
 func _physics_process(delta):
 	#DEBUG
@@ -129,3 +129,9 @@ func die():
 
 # ------------------------------------------------------------------------------
 
+func _on_TargetFinder_hook_found(hook):
+	if hook != null:
+		self.hook = hook
+
+func _on_TargetFinder_hook_lost():
+	self.hook = null

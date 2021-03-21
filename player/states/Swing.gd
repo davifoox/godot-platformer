@@ -1,8 +1,8 @@
 class_name Swing
 extends PlayerState
 
-func enter(_msg := {}) -> void:
-	player.set_hook_detection_monitoring(false)
+#func enter(_msg := {}) -> void:
+#	player.set_hook_detection_monitoring(false)
 
 func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)
@@ -17,6 +17,6 @@ func physics_update(delta: float) -> void:
 	if Input.is_action_just_released("action1"):
 		state_machine.transition_to("Fall")
 
-func exit() -> void:
-	player.set_hook_detection_monitoring(true)
-	player.hook = null
+#func exit() -> void:
+#	player.set_hook_detection_monitoring(true)
+#	player.hook = null
