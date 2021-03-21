@@ -1,18 +1,18 @@
 class_name Player
 extends KinematicBody2D
 
-onready var left_wall_raycasts = $WallRaycasts/LeftWallRaycasts
-onready var right_wall_raycasts = $WallRaycasts/RightWallRaycasts
-onready var sprite = $Sprite
-onready var wall_slide_cooldown = $Timers/WallSlideCooldown
-onready var wall_jump_cooldown = $Timers/WallJumpCooldown
-onready var wall_slide_sticky_timer = $Timers/WallSlideStickyTimer
-onready var coyote_timer = $Timers/CoyoteTimer
-onready var hook_detection = $HookDetection
-onready var state_machine = $StateMachine
-onready var camera = $Camera2D
-onready var ledge_collision = $LedgeCollision
+onready var left_wall_raycasts: Node2D = $WallRaycasts/LeftWallRaycasts
+onready var right_wall_raycasts: Node2D = $WallRaycasts/RightWallRaycasts
+onready var sprite: Sprite = $Sprite
+onready var wall_slide_cooldown: Timer = $Timers/WallSlideCooldown
+onready var wall_jump_cooldown: Timer = $Timers/WallJumpCooldown
+onready var wall_slide_sticky_timer: Timer = $Timers/WallSlideStickyTimer
+onready var coyote_timer: Timer = $Timers/CoyoteTimer
 onready var jump_buffer: Timer = $Timers/JumpBuffer
+onready var hook_detection: Area2D = $HookDetection
+onready var ledge_collision: CollisionShape2D = $LedgeCollision
+onready var state_machine: StateMachine = $StateMachine
+onready var camera: Camera2D = $Camera2D
 
 var velocity = Vector2()
 var floor_normal = Vector2.UP

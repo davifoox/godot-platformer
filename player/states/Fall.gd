@@ -25,7 +25,7 @@ func physics_update(delta: float) -> void:
 		
 	if player.check_is_on_floor():
 		state_machine.transition_to("Idle")
-	elif !player.coyote_timer.is_stopped() and Input.is_action_just_pressed("action1"):
+	elif !player.coyote_timer.is_stopped() and (Input.is_action_just_pressed("action1") or !player.jump_buffer.is_stopped()):
 		state_machine.transition_to("Jump")
 	elif player.wall_direction != 0 and player.wall_slide_cooldown.is_stopped():
 		state_machine.transition_to("WallSlide")
