@@ -13,7 +13,7 @@ func physics_update(delta: float) -> void:
 	else:
 		player.velocity.x = lerp(player.velocity.x , 0, player.air_h_weight)
 		
-	if Input.is_action_just_released("action1"):
+	if !Input.is_action_pressed("action1"):
 		player.velocity.y *= 0.5
 	if Input.is_action_just_pressed("action1"):
 		player.jump_buffer.start()
