@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/player.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://player/states/GrabLedge.gd" type="Script" id=12]
 [ext_resource path="res://player/target.png" type="Texture" id=13]
 [ext_resource path="res://player/TargetFinder.gd" type="Script" id=14]
+[ext_resource path="res://player/VFXPlayer.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
@@ -53,7 +54,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-length = 0.8
+length = 1.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -62,10 +63,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [ 0, 2 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -84,7 +85,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-length = 0.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -93,7 +93,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.6, 0.7 ),
+"times": PoolRealArray( 0, 0.3, 0.4, 0.5, 0.8, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 4, 5, 6, 7, 8, 9 ]
@@ -130,6 +130,118 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
+[sub_resource type="Animation" id=12]
+resource_name = "Fall"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.75, 1.25 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "HitFloor"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 4 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 0.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Jump"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 2, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Reset"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -154,7 +266,7 @@ z_index = 1
 texture = ExtResource( 13 )
 script = ExtResource( 14 )
 target_tipe = "hook"
-min_distance = 75
+max_distance = 75
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -194,6 +306,13 @@ anims/Run = SubResource( 7 )
 anims/WallJump = SubResource( 8 )
 anims/WallSlide = SubResource( 9 )
 script = ExtResource( 11 )
+
+[node name="VFXPlayer" type="AnimationPlayer" parent="."]
+anims/Fall = SubResource( 12 )
+anims/HitFloor = SubResource( 10 )
+anims/Jump = SubResource( 11 )
+anims/Reset = SubResource( 13 )
+script = ExtResource( 15 )
 
 [node name="WallRaycasts" type="Node2D" parent="."]
 visible = false
@@ -253,6 +372,7 @@ limit_top = 0
 limit_bottom = 180
 offset_h = 1.0
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
-[connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="VFXPlayer" method="_on_StateMachine_transitioned"]
