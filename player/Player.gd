@@ -129,9 +129,5 @@ func die():
 
 # ------------------------------------------------------------------------------
 
-func _on_TargetFinder_hook_found(hook):
-	if hook != null:
-		self.hook = hook
-
-func _on_TargetFinder_hook_lost():
-	self.hook = null
+func _on_TargetFinder_target_changed(current_target):
+	hook = current_target

@@ -1,42 +1,45 @@
 extends Sprite
 
 #export(NodePath) onready var state_machine = get_node(state_machine) as StateMachine
+export(String) var target_tipe
 export(int) var min_distance = 50
-onready var hook_list = get_tree().get_nodes_in_group("hook")
-var current_hook = null
-signal hook_found(hook)
-signal hook_lost
-var search = true
+
+onready var target_list = get_tree().get_nodes_in_group(target_tipe)
+var search: bool = true
+
+var last_target = null
+var current_target = null
+
+signal target_changed(current_target)
 
 func _process(delta):
-	get_closest_hook()
-	set_target_position_and_visibility()
+	_find_target()
+	_set_target_position_and_visibility()
 
-func get_closest_hook():
+func _find_target():
 	if !search:
 		return
 		
-	for h in hook_list:
-		var distance = owner.global_position.distance_to(h.global_position)
+	for t in target_list:
+		var distance = owner.global_position.distance_to(t.global_position)
 		if distance < min_distance:
-			if current_hook == null:
-				current_hook = h
-			elif distance < owner.global_position.distance_to(current_hook.global_position):
-				current_hook = h
-		elif current_hook != null:
-			if owner.global_position.distance_to(current_hook.global_position) > min_distance:
-				current_hook = null
+			if current_target == null:
+				current_target = t
+			elif distance < owner.global_position.distance_to(current_target.global_position):
+				current_target = t
+		elif current_target != null:
+			if owner.global_position.distance_to(current_target.global_position) > min_distance:
+				current_target = null
 			
+	if last_target != current_target:
+		emit_signal("target_changed", current_target)
 	
-	if current_hook != null:
-		emit_signal("hook_found", current_hook)
-	else:
-		emit_signal("hook_lost")
+	last_target = current_target
 		
-func set_target_position_and_visibility():
-	if current_hook != null:
+func _set_target_position_and_visibility():
+	if current_target != null:
 		visible = true
-		global_position = current_hook.global_position
+		global_position = current_target.global_position
 	else:
 		visible = false
 		global_position = owner.global_position
