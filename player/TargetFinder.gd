@@ -1,7 +1,7 @@
 extends Sprite
 
 #export(NodePath) onready var state_machine = get_node(state_machine) as StateMachine
-var min_distance = 50
+export(int) var min_distance = 50
 onready var hook_list = get_tree().get_nodes_in_group("hook")
 var current_hook = null
 signal hook_found(hook)

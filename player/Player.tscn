@@ -153,6 +153,7 @@ visible = false
 z_index = 1
 texture = ExtResource( 13 )
 script = ExtResource( 14 )
+min_distance = 75
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
