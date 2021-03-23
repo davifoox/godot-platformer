@@ -30,7 +30,3 @@ func _on_StateMachine_transitioned(state_name, previous_state_name):
 
 func play_animation(animation_name: String):
 	play(animation_name)
-
-func _on_Player_direciton_changed(dir):
-	if dir != 0:
-		direction = dir

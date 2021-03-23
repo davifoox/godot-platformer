@@ -12,6 +12,8 @@ onready var wall_slide_cooldown: Timer = $Timers/WallSlideCooldown
 onready var wall_jump_cooldown: Timer = $Timers/WallJumpCooldown
 onready var coyote_timer: Timer = $Timers/CoyoteTimer
 onready var jump_buffer: Timer = $Timers/JumpBuffer
+onready var sprite_distortion_player: AnimationPlayer = $SpriteDistortionPlayer
+onready var particle_spawner: Node = $ParticleSpawner
 
 var velocity = Vector2()
 var floor_normal = Vector2.UP
@@ -36,7 +38,6 @@ var floor_h_weight = 0.5
 var hook = null
 var retract_force = 1250#1000
 
-signal direciton_changed(dir)
 
 func _draw():
 	if state_machine.state.name == "Swing":
@@ -129,4 +130,5 @@ func set_move_direction(value: int):
 	if value != move_direction:
 		move_direction = value
 		_update_flip()
-		emit_signal("direciton_changed", move_direction)
+		sprite_distortion_player.direction = move_direction
+		particle_spawner.direction = move_direction

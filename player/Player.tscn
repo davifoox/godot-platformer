@@ -88,6 +88,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=7]
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -107,7 +108,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0.05, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -357,6 +358,7 @@ disabled = true
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 15
+frame = 4
 
 [node name="TargetFinder" type="Sprite" parent="."]
 visible = false
@@ -476,10 +478,8 @@ one_shot = true
 limit_top = 0
 limit_bottom = 180
 offset_h = 1.0
-[connection signal="direciton_changed" from="." to="ParticleSpawner" method="_on_Player_direciton_changed"]
-[connection signal="direciton_changed" from="." to="SpriteDistortionPlayer" method="_on_Player_direciton_changed"]
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
 [connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
-[connection signal="transitioned" from="StateMachine" to="SpriteDistortionPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="SpriteDistortionPlayer" method="_on_StateMachine_transitioned"]
