@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://player/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player.png" type="Texture" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://player/states/GrabLedge.gd" type="Script" id=12]
 [ext_resource path="res://player/sprites/target.png" type="Texture" id=13]
 [ext_resource path="res://player/scripts/TargetFinder.gd" type="Script" id=14]
-[ext_resource path="res://player/scripts/VFXPlayer.gd" type="Script" id=15]
+[ext_resource path="res://player/scripts/SpriteDistortionPlayer.gd" type="Script" id=15]
 [ext_resource path="res://player/particles/RunDust.tscn" type="PackedScene" id=16]
+[ext_resource path="res://player/scripts/ParticleSpawner.gd" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
@@ -100,15 +101,18 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("VFXPlayer")
+tracks/1/path = NodePath("ParticleSpawner")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spawn_dust_particle"
+}, {
 "args": [  ],
 "method": "spawn_dust_particle"
 } ]
@@ -255,7 +259,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=14]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -282,7 +286,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=15]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -309,7 +313,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=16]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -353,7 +357,6 @@ disabled = true
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 15
-frame = 4
 
 [node name="TargetFinder" type="Sprite" parent="."]
 visible = false
@@ -402,15 +405,18 @@ anims/WallJump = SubResource( 8 )
 anims/WallSlide = SubResource( 9 )
 script = ExtResource( 11 )
 
-[node name="VFXPlayer" type="AnimationPlayer" parent="."]
+[node name="SpriteDistortionPlayer" type="AnimationPlayer" parent="."]
 anims/Fall = SubResource( 10 )
 anims/HitFloor = SubResource( 11 )
 anims/Jump = SubResource( 12 )
 anims/Reset = SubResource( 13 )
-anims/WallJump = SubResource( 15 )
-anims/WallSlideLeft = SubResource( 16 )
-anims/WallSlideRight = SubResource( 17 )
+anims/WallJump = SubResource( 14 )
+anims/WallSlideLeft = SubResource( 15 )
+anims/WallSlideRight = SubResource( 16 )
 script = ExtResource( 15 )
+
+[node name="ParticleSpawner" type="Node" parent="."]
+script = ExtResource( 17 )
 dust_particle = ExtResource( 16 )
 
 [node name="WallRaycasts" type="Node2D" parent="."]
@@ -470,9 +476,10 @@ one_shot = true
 limit_top = 0
 limit_bottom = 180
 offset_h = 1.0
-[connection signal="direciton_changed" from="." to="VFXPlayer" method="_on_Player_direciton_changed"]
+[connection signal="direciton_changed" from="." to="ParticleSpawner" method="_on_Player_direciton_changed"]
+[connection signal="direciton_changed" from="." to="SpriteDistortionPlayer" method="_on_Player_direciton_changed"]
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
 [connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
-[connection signal="transitioned" from="StateMachine" to="VFXPlayer" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="SpriteDistortionPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
