@@ -130,5 +130,7 @@ func set_move_direction(value: int):
 	if value != move_direction:
 		move_direction = value
 		_update_flip()
-		sprite_distortion_player.direction = move_direction
-		particle_spawner.direction = move_direction
+		if sprite_distortion_player != null:
+			sprite_distortion_player.direction = move_direction
+		if particle_spawner != null:
+			particle_spawner.direction = move_direction
