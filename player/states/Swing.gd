@@ -2,7 +2,10 @@ class_name Swing
 extends PlayerState
 
 func physics_update(delta: float) -> void:
-	player.apply_gravity(delta)
+	#apply gravity
+	player.velocity.y += player.gravity * delta
+	player.velocity.y = clamp(player.velocity.y, -player.gravity, player.max_y_velocity)
+	
 	var radius = player.global_position - player.hook.position # points away from center
 	#if velocity.length() < 0.01 or radius.length() < 10: return
 	var angle = acos(radius.dot(player.velocity) / (radius.length() * player.velocity.length()))

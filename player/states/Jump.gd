@@ -5,7 +5,10 @@ func enter(_msg := {}) -> void:
 	player.velocity.y = -player.jump_force
 
 func physics_update(delta: float) -> void:
-	player.apply_gravity(delta)
+	#apply gravity
+	player.velocity.y += player.gravity * delta
+	player.velocity.y = clamp(player.velocity.y, -player.gravity, player.max_y_velocity)
+	
 	if Input.is_action_pressed("left"):
 		player.velocity.x = max(player.velocity.x - player.acc * delta, -player.max_speed)
 	elif Input.is_action_pressed("right"):

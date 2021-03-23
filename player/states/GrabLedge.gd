@@ -6,7 +6,9 @@ func enter(_msg := {}) -> void:
 	player.velocity.x = 0
 	
 func physics_update(delta: float) -> void:
-	player.apply_gravity(delta)
+	#apply gravity
+	player.velocity.y += player.gravity * delta
+	player.velocity.y = clamp(player.velocity.y, -player.gravity, player.max_y_velocity)
 	
 	if Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Jump")

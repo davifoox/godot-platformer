@@ -12,7 +12,10 @@ func enter(_msg := {}) -> void:
 	player.wall_jump_cooldown.start()
 
 func physics_update(delta: float) -> void:
-	player.apply_gravity(delta)
+	#apply gravity
+	player.velocity.y += player.gravity * delta
+	player.velocity.y = clamp(player.velocity.y, -player.gravity, player.max_y_velocity)
+	
 	if Input.is_action_just_released("action1"):
 		player.velocity *= 0.5
 	if player.velocity.x != 0:

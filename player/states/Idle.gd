@@ -2,7 +2,10 @@ class_name Idle
 extends PlayerState
 
 func physics_update(delta: float) -> void:
-	player.apply_gravity(delta)
+	#apply gravity
+	player.velocity.y += player.gravity * delta
+	player.velocity.y = clamp(player.velocity.y, -player.gravity, player.max_y_velocity)
+	
 	player.velocity.x = lerp(player.velocity.x, 0, player.floor_h_weight)
 
 	if Input.is_action_pressed("left"):

@@ -18,6 +18,7 @@ var floor_normal = Vector2.UP
 var wall_jump_velocity = Vector2(150, -270)
 
 var gravity = 1000
+var max_y_velocity = 300
 var acc = 1800
 var max_speed = 100
 var jump_force = 270
@@ -44,36 +45,17 @@ func _physics_process(delta):
 	#DEBUG
 	
 	update() #draw
-	update_wall_direction()
-	update_camera_h_position()
-	update_ledge_collision_h_position()
-	update_movement()
-	if check_passing_vertical_limit() == true:
-		die()
+	_update_wall_direction()
+	_update_camera_h_position()
+	_update_ledge_collision_h_position()
+	_update_movement()
+	if _check_passing_vertical_limit() == true:
+		_die()
 
-# Runs on all States: ----------------------------------------------------------
-
-func apply_gravity(delta) -> void:
-	velocity.y += gravity * delta
-	velocity.y = clamp(velocity.y, -gravity, gravity * 0.3)
-
-func update_movement() -> void:
+func _update_movement() -> void:
 	velocity = move_and_slide(velocity, floor_normal)
 
-#func update_move_direction() -> void:
-#	var new_direction# = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
-#	if Input.is_action_pressed("right"):
-#		new_direction = 1
-#	elif Input.is_action_pressed("left"):
-#		new_direction = -1
-#	else:
-#		new_direction = 0
-#	if new_direction != move_direction:
-#		emit_signal("direciton_changed", move_direction)
-#		move_direction = new_direction
-	
-
-func update_flip() -> void:
+func _update_flip() -> void:
 	if state_machine.state.name == "GrabLedge":
 		return
 	if move_direction == 1:
@@ -81,18 +63,50 @@ func update_flip() -> void:
 	elif move_direction == -1:
 		sprite.flip_h = true
 		
-func update_camera_h_position() -> void:
+func _update_camera_h_position() -> void:
 	var speed = 0.025
 	if move_direction != 0 and wall_direction == 0:
 		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
 
-func update_ledge_collision_h_position() -> void:
+func _update_ledge_collision_h_position() -> void:
 	if move_direction != 0 and state_machine.state.name != "GrabLedge":
 		if move_direction == 1:
 			ledge_collision.position = Vector2(6,-13)
 		elif move_direction == -1:
 			ledge_collision.position = Vector2(-6,-13)
 
+func _update_wall_direction() -> void:
+	var is_near_wall_left = _check_is_valid_wall(left_wall_raycasts)
+	var is_near_wall_right = _check_is_valid_wall(right_wall_raycasts)
+	if is_near_wall_left and is_near_wall_right:
+		wall_direction = move_direction
+	else:
+		wall_direction = -int(is_near_wall_left) + int(is_near_wall_right)
+		
+func _check_is_valid_wall(wall_raycasts) -> bool:
+	for raycast in wall_raycasts.get_children():
+		if raycast.is_colliding():
+			return true
+	return false
+	
+func _check_passing_vertical_limit() -> bool:
+	if position.y > 200:
+		return true
+	return false
+
+func _die():
+	GameEvents.emit_signal("player_died")
+
+#-------------------------------------------------------------------------------
+
+func check_close_to_floor():
+	if raycast_down_center.is_colliding():
+		return true
+	return false
+
+func check_is_on_floor() -> bool:
+	return is_on_floor()
+	
 func activate_ledge_collision(value: bool) -> void:
 	ledge_collision.disabled = !value
 
@@ -107,43 +121,11 @@ func check_is_on_ledge() -> bool:
 				return true
 	return false
 
-func update_wall_direction() -> void:
-	var is_near_wall_left = _check_is_valid_wall(left_wall_raycasts)
-	var is_near_wall_right = _check_is_valid_wall(right_wall_raycasts)
-	if is_near_wall_left and is_near_wall_right:
-		wall_direction = move_direction
-	else:
-		wall_direction = -int(is_near_wall_left) + int(is_near_wall_right)
-		
-func _check_is_valid_wall(wall_raycasts) -> bool:
-	for raycast in wall_raycasts.get_children():
-		if raycast.is_colliding():
-			return true
-	return false
-
-func check_close_to_floor():
-	if raycast_down_center.is_colliding():
-		return true
-	return false
-
-func check_is_on_floor() -> bool:
-	return is_on_floor()
-
-func check_passing_vertical_limit() -> bool:
-	if position.y > 200:
-		return true
-	return false
-
-func die():
-	GameEvents.emit_signal("player_died")
-
-# ------------------------------------------------------------------------------
-
 func _on_TargetFinder_target_changed(current_target):
 	hook = current_target
 
 func set_move_direction(value: int):
 	if value != move_direction:
 		move_direction = value
+		_update_flip()
 		emit_signal("direciton_changed", move_direction)
-		update_flip()

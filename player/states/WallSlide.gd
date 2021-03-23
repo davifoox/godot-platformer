@@ -3,7 +3,10 @@ extends PlayerState
 
 
 func physics_update(delta: float) -> void:
-	player.apply_gravity(delta)
+	#apply gravity
+	player.velocity.y += player.gravity * delta
+	player.velocity.y = clamp(player.velocity.y, -player.gravity, player.max_y_velocity)
+	
 	if player.velocity.y < 0 and Input.is_action_just_released("action1"):
 		player.velocity.y *= 0.5
 	if player.move_direction == player.wall_direction: #VERDEPOIS definir aqui se quer que sempre fique mais lento ou só quando aperta na direção oposta
