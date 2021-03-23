@@ -22,3 +22,5 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Fall")
 	elif Input.is_action_just_pressed("action1") or !player.jump_buffer.is_stopped():
 		state_machine.transition_to("Jump")
+	elif Input.is_action_just_pressed("action2"):
+		state_machine.transition_to("Dash")

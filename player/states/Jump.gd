@@ -37,3 +37,6 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("WallSlide")
 	elif player.hook != null and Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Swing")
+	elif Input.is_action_just_pressed("action2"):
+		state_machine.transition_to("Dash")
+		
