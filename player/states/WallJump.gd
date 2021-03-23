@@ -15,7 +15,7 @@ func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)
 	if Input.is_action_just_released("action1"):
 		player.velocity *= 0.5
-	direction_fix()
+	player.move_direction = sign(player.velocity.x)
 		
 	if player.wall_jump_cooldown.is_stopped():
 		state_machine.transition_to("Fall")
@@ -26,10 +26,3 @@ func physics_update(delta: float) -> void:
 			state_machine.transition_to("Idle")
 	if player.wall_direction != 0 and player.wall_slide_cooldown.is_stopped():
 		state_machine.transition_to("WallSlide")
-
-func direction_fix():
-	if player.velocity.x > 0:
-		player.move_direction = 1
-	else:
-		player.move_direction = -1
-	player.update_flip()

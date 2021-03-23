@@ -22,7 +22,7 @@ var acc = 1800
 var max_speed = 100
 var jump_force = 270
 
-var move_direction = 1
+var move_direction = 1 setget set_move_direction
 var wall_direction = 1
 
 var air_h_weight_regular = 0.5
@@ -42,10 +42,11 @@ func _draw():
 
 func _physics_process(delta):
 	#DEBUG
+	print(move_direction)
 	
 	update() #draw
 	update_wall_direction()
-	update_move_direction()
+	#update_move_direction()
 	update_flip()
 	update_camera_h_position()
 	update_ledge_collision_h_position()
@@ -62,17 +63,17 @@ func apply_gravity(delta) -> void:
 func update_movement() -> void:
 	velocity = move_and_slide(velocity, floor_normal)
 
-func update_move_direction() -> void:
-	var new_direction# = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
-	if Input.is_action_pressed("right"):
-		new_direction = 1
-	elif Input.is_action_pressed("left"):
-		new_direction = -1
-	else:
-		new_direction = 0
-	if new_direction != move_direction:
-		emit_signal("direciton_changed", move_direction)
-		move_direction = new_direction
+#func update_move_direction() -> void:
+#	var new_direction# = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
+#	if Input.is_action_pressed("right"):
+#		new_direction = 1
+#	elif Input.is_action_pressed("left"):
+#		new_direction = -1
+#	else:
+#		new_direction = 0
+#	if new_direction != move_direction:
+#		emit_signal("direciton_changed", move_direction)
+#		move_direction = new_direction
 	
 
 func update_flip() -> void:
@@ -143,3 +144,9 @@ func die():
 
 func _on_TargetFinder_target_changed(current_target):
 	hook = current_target
+
+func set_move_direction(value: int):
+	if value != move_direction:
+		move_direction = value
+		emit_signal("direciton_changed", move_direction)
+		

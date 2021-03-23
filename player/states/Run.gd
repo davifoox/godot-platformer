@@ -7,7 +7,7 @@ func physics_update(delta: float) -> void:
 		player.velocity.x = max(player.velocity.x - player.acc * delta, -player.max_speed)
 	elif Input.is_action_pressed("right"):
 		player.velocity.x = min(player.velocity.x + player.acc * delta, player.max_speed)
-	
+	player.move_direction = sign(player.velocity.x)
 	
 	if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
 		state_machine.transition_to("Idle")

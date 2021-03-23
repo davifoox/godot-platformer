@@ -19,13 +19,13 @@ func _on_StateMachine_transitioned(state_name, previous_state_name):
 		"WallJump":
 			play("WallJump")
 		"WallSlide":
-			if direction == -1:
-				play("WallSlideRight")
-			elif direction == 1:
-				play("WallSlideLeft")
+			if previous_state_name != "GrabLedge":
+				if direction == 1:
+					play("WallSlideRight")
+				elif direction == -1:
+					play("WallSlideLeft")
 
 
 func _on_Player_direciton_changed(dir):
 	if dir != 0:
 		direction = dir
-		print("remover a opção de mudar de direção no Player.gd e colocar nos estados específicos!")

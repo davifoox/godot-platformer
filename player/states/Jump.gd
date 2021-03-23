@@ -12,7 +12,8 @@ func physics_update(delta: float) -> void:
 		player.velocity.x = min(player.velocity.x + player.acc * delta, player.max_speed)
 	else:
 		player.velocity.x = lerp(player.velocity.x , 0, player.air_h_weight)
-		
+	if player.velocity.x != 0:
+		player.move_direction = sign(player.velocity.x)
 	if !Input.is_action_pressed("action1"):
 		player.velocity.y *= 0.5
 	if Input.is_action_just_pressed("action1"):
@@ -24,5 +25,3 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("WallSlide")
 	elif player.hook != null and Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Swing")
-		
-
