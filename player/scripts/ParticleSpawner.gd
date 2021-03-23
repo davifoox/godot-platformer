@@ -18,4 +18,4 @@ func _on_StateMachine_transitioned(state_name, previous_state_name):
 	_current_state_name = state_name
 	while _current_state_name == "Run":
 		spawn_dust_particle()
-		yield(get_tree().create_timer(0.5), "timeout") #VERDEPOIS isso custa muito processamento?
+		yield(get_tree().create_timer(1), "timeout") #VERDEPOIS isso custa muito processamento?
