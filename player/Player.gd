@@ -42,12 +42,9 @@ func _draw():
 
 func _physics_process(delta):
 	#DEBUG
-	print(move_direction)
 	
 	update() #draw
 	update_wall_direction()
-	#update_move_direction()
-	update_flip()
 	update_camera_h_position()
 	update_ledge_collision_h_position()
 	update_movement()
@@ -149,4 +146,5 @@ func set_move_direction(value: int):
 	if value != move_direction:
 		move_direction = value
 		emit_signal("direciton_changed", move_direction)
-		
+		update_flip()
+		print("direction changed: " + str(move_direction))

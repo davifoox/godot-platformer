@@ -437,7 +437,7 @@ cast_to = Vector2( 0, 16 )
 [node name="Timers" type="Node" parent="."]
 
 [node name="WallSlideCooldown" type="Timer" parent="Timers"]
-wait_time = 0.15
+wait_time = 0.1
 one_shot = true
 
 [node name="WallJumpCooldown" type="Timer" parent="Timers"]

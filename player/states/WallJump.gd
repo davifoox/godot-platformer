@@ -15,7 +15,8 @@ func physics_update(delta: float) -> void:
 	player.apply_gravity(delta)
 	if Input.is_action_just_released("action1"):
 		player.velocity *= 0.5
-	player.move_direction = sign(player.velocity.x)
+	if player.velocity.x != 0:
+		player.move_direction = sign(player.velocity.x)
 		
 	if player.wall_jump_cooldown.is_stopped():
 		state_machine.transition_to("Fall")

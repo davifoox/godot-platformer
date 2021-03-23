@@ -31,7 +31,7 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Jump")
 	elif player.wall_direction != 0 and player.wall_slide_cooldown.is_stopped():
 		state_machine.transition_to("WallSlide")
-	#buga quando o player deslizou numa parede até cair, entrando no estado fall
+	#VERDEPOIS buga quando o player deslizou numa parede até cair, entrando no estado fall
 	#nesse caso quando dá o wall_jump vai na mesma direção da parede
 	elif !player.wall_slide_cooldown.is_stopped() and Input.is_action_just_pressed("action1") and player.move_direction != 0:
 		state_machine.transition_to("WallJump")
