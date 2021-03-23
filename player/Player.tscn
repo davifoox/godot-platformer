@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://player/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player.png" type="Texture" id=2]
@@ -103,7 +103,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=8]
-resource_name = "WallJump"
+resource_name = "Swing"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -115,7 +115,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 13 ]
+"values": [ 15 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -130,11 +130,25 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 12 ]
+"values": [ 13 ]
 }
 
 [sub_resource type="Animation" id=10]
-resource_name = "Fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+
+[sub_resource type="Animation" id=11]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -161,7 +175,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.75, 1.25 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -188,7 +202,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -215,8 +229,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "Reset"
+[sub_resource type="Animation" id=14]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -243,7 +256,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -270,7 +283,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -297,7 +310,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -340,8 +353,7 @@ disabled = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-hframes = 15
-frame = 4
+hframes = 16
 
 [node name="TargetFinder" type="Sprite" parent="."]
 visible = false
@@ -386,18 +398,19 @@ anims/GrabLedge = SubResource( 4 )
 anims/Idle = SubResource( 5 )
 anims/Jump = SubResource( 6 )
 anims/Run = SubResource( 7 )
-anims/WallJump = SubResource( 8 )
-anims/WallSlide = SubResource( 9 )
+anims/Swing = SubResource( 8 )
+anims/WallJump = SubResource( 9 )
+anims/WallSlide = SubResource( 10 )
 script = ExtResource( 11 )
 
 [node name="SpriteDistortionPlayer" type="AnimationPlayer" parent="."]
-anims/Fall = SubResource( 10 )
-anims/HitFloor = SubResource( 11 )
-anims/Jump = SubResource( 12 )
-anims/Reset = SubResource( 13 )
-anims/WallJump = SubResource( 14 )
-anims/WallSlideLeft = SubResource( 15 )
-anims/WallSlideRight = SubResource( 16 )
+anims/Fall = SubResource( 11 )
+anims/HitFloor = SubResource( 12 )
+anims/Jump = SubResource( 13 )
+anims/Reset = SubResource( 14 )
+anims/WallJump = SubResource( 15 )
+anims/WallSlideLeft = SubResource( 16 )
+anims/WallSlideRight = SubResource( 17 )
 script = ExtResource( 15 )
 
 [node name="ParticleSpawner" type="Node" parent="."]
@@ -463,7 +476,7 @@ limit_bottom = 180
 offset_h = 1.0
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
 [connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
-[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
-[connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
-[connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="SpriteDistortionPlayer" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]

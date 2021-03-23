@@ -13,7 +13,7 @@ func physics_update(delta: float) -> void:
 	player.velocity.y += player.gravity * delta
 	player.velocity.y = clamp(player.velocity.y, -player.gravity, player.max_y_velocity)
 	
-	var radius = player.global_position - player.hook.position
+	var radius = player.global_position - player.hook.global_position
 	var angle = acos(radius.dot(player.velocity) / (radius.length() * player.velocity.length()))
 	var rad_velocity = cos(angle) * player.velocity.length()
 
@@ -34,6 +34,8 @@ func physics_update(delta: float) -> void:
 	if Input.is_action_just_pressed("down"):
 		player.velocity.y = 0
 	
+	player.sprite.look_at(player.hook.global_position)
+	player.sprite.rotation_degrees += 90
 	
 	if Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Jump")
@@ -51,3 +53,6 @@ func apply_friciton(delta):
 			player.velocity.x += swing_friction * delta
 	else:
 		player.velocity.x = 0
+
+func exit() -> void:
+	player.sprite.rotation_degrees = 0
