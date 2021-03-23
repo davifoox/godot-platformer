@@ -147,4 +147,3 @@ func set_move_direction(value: int):
 		move_direction = value
 		emit_signal("direciton_changed", move_direction)
 		update_flip()
-		print("direction changed: " + str(move_direction))
