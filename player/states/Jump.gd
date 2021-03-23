@@ -1,8 +1,14 @@
 class_name Jump
 extends PlayerState
 
+var air_h_weight: float
+
 func enter(_msg := {}) -> void:
 	player.velocity.y = -player.jump_force
+	if state_machine.last_state_name == "Swing":
+		air_h_weight = player.air_h_weight_small
+	else:
+		air_h_weight = player.air_h_weight_regular
 
 func physics_update(delta: float) -> void:
 	#apply gravity
@@ -14,7 +20,7 @@ func physics_update(delta: float) -> void:
 	elif Input.is_action_pressed("right"):
 		player.velocity.x = min(player.velocity.x + player.acc * delta, player.max_speed)
 	else:
-		player.velocity.x = lerp(player.velocity.x , 0, player.air_h_weight)
+		player.velocity.x = lerp(player.velocity.x , 0, air_h_weight)
 	if player.velocity.x != 0:
 		player.move_direction = sign(player.velocity.x)
 	if !Input.is_action_pressed("action1"):

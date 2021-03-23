@@ -46,10 +46,11 @@ func physics_update(delta: float) -> void:
 func apply_friciton(delta):
 	print(player.velocity.x)
 	
-	if abs(player.velocity.x) < 1:
-		return
-	if player.move_direction == 1 and !Input.is_action_pressed("right"):
-		player.velocity.x -= swing_friction * delta
-	elif player.move_direction == -1 and !Input.is_action_pressed("left"):
-		player.velocity.x += swing_friction * delta
-			
+	if abs(player.velocity.x) > 1:
+		
+		if player.move_direction == 1 and !Input.is_action_pressed("right"):
+			player.velocity.x -= swing_friction * delta
+		elif player.move_direction == -1 and !Input.is_action_pressed("left"):
+			player.velocity.x += swing_friction * delta
+	else:
+		player.velocity.x = 0
