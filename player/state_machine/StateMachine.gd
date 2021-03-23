@@ -45,5 +45,5 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 
 
 func _on_StateMachine_transitioned(state_name, previous_state_name):
-	#print(state_name)
+	print(state_name)
 	pass

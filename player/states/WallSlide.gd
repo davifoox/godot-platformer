@@ -17,7 +17,10 @@ func physics_update(delta: float) -> void:
 		player.move_direction = 1
 	if Input.is_action_just_pressed("action1"):
 		player.jump_buffer.start()
-	
+
+	#move
+	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
+
 	if player.check_is_on_floor():
 		state_machine.transition_to("Idle")
 	elif player.move_direction != player.wall_direction:

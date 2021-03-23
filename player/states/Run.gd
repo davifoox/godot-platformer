@@ -13,6 +13,9 @@ func physics_update(delta: float) -> void:
 	if player.velocity.x != 0:
 		player.move_direction = sign(player.velocity.x)
 	
+	#move
+	player.velocity = player.move_and_slide_with_snap(player.velocity,Vector2(0,8), player.floor_normal)
+	
 	if !Input.is_action_pressed("left") and !Input.is_action_pressed("right"):
 		state_machine.transition_to("Idle")
 	elif player.check_is_on_floor() == false:

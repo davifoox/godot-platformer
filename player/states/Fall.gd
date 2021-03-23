@@ -25,10 +25,13 @@ func physics_update(delta: float) -> void:
 		player.velocity.x = lerp(player.velocity.x , 0, air_h_weight)
 	if player.velocity.x != 0:
 		player.move_direction = sign(player.velocity.x)
-	if Input.is_action_pressed("down"): #VERDEPOIS
-		player.velocity.y += player.push_down_speed * delta
+#	if Input.is_action_pressed("down"): #VERDEPOIS
+#		player.velocity.y += player.push_down_speed * delta
 	if Input.is_action_just_pressed("action1"):
 		player.jump_buffer.start()
+	
+	#move
+	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
 		
 	if player.check_is_on_floor():
 		state_machine.transition_to("Idle")

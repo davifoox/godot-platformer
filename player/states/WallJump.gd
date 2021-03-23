@@ -20,7 +20,10 @@ func physics_update(delta: float) -> void:
 		player.velocity *= 0.5
 	if player.velocity.x != 0:
 		player.move_direction = sign(player.velocity.x)
-		
+
+	#move
+	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
+
 	if player.wall_jump_cooldown.is_stopped():
 		state_machine.transition_to("Fall")
 	if player.check_is_on_floor():

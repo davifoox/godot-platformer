@@ -50,12 +50,8 @@ func _physics_process(delta):
 	_update_wall_direction()
 	_update_camera_h_position()
 	_update_ledge_collision_h_position()
-	_update_movement()
 	if _check_passing_vertical_limit() == true:
 		_die()
-
-func _update_movement() -> void:
-	velocity = move_and_slide(velocity, floor_normal)
 
 func _update_flip() -> void:
 	if state_machine.state.name == "GrabLedge":

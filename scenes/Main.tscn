@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://tilesets/tileset-01/tileset-01.tres" type="TileSet" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hook/Hook.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/LevelManager.gd" type="Script" id=4]
+[ext_resource path="res://tilesets/tileset-01/tileset-01.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 90 )
@@ -13,6 +14,41 @@ extents = Vector2( 30, 90 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 60, 90 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "move"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 280, 136 ), Vector2( 280, 56 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "move"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 200, 104 ), Vector2( 120, 104 ) ]
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -49,3 +85,43 @@ position = Vector2( 200, 0 )
 shape = SubResource( 3 )
 shape_visible = false
 action = "action1"
+
+[node name="MovingPlatform1" type="KinematicBody2D" parent="."]
+position = Vector2( 280, 56 )
+collision_mask = 0
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform1"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="MovingPlatform1"]
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 48, 48, 16, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform1"]
+autoplay = "move"
+playback_process_mode = 0
+playback_speed = 0.25
+anims/move = SubResource( 5 )
+
+[node name="MovingPlatform2" type="KinematicBody2D" parent="."]
+position = Vector2( 120, 104 )
+collision_mask = 0
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform2"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="MovingPlatform2"]
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 48, 48, 16, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform2"]
+autoplay = "move"
+playback_process_mode = 0
+playback_speed = 0.25
+anims/move = SubResource( 6 )

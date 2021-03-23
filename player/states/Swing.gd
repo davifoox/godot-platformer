@@ -37,6 +37,9 @@ func physics_update(delta: float) -> void:
 	player.sprite.look_at(player.hook.global_position)
 	player.sprite.rotation_degrees += 90
 	
+	#move
+	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
+	
 	if Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Jump")
 	if Input.is_action_just_pressed("down"):
