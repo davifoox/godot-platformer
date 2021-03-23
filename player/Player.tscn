@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://player/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player.png" type="Texture" id=2]
@@ -24,6 +24,22 @@ extents = Vector2( 4, 6 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2, 2 )
+
+[sub_resource type="Animation" id=18]
+resource_name = "Dash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.1
@@ -147,6 +163,34 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 12 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "Dash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 4 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.75, 0.5 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -354,7 +398,8 @@ disabled = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-hframes = 16
+hframes = 17
+frame = 16
 
 [node name="TargetFinder" type="Sprite" parent="."]
 visible = false
@@ -397,6 +442,7 @@ script = ExtResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
+anims/Dash = SubResource( 18 )
 anims/Fall = SubResource( 3 )
 anims/GrabLedge = SubResource( 4 )
 anims/Idle = SubResource( 5 )
@@ -408,6 +454,7 @@ anims/WallSlide = SubResource( 10 )
 script = ExtResource( 11 )
 
 [node name="SpriteDistortionPlayer" type="AnimationPlayer" parent="."]
+anims/Dash = SubResource( 19 )
 anims/Fall = SubResource( 11 )
 anims/HitFloor = SubResource( 12 )
 anims/Jump = SubResource( 13 )

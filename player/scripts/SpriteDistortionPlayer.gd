@@ -25,6 +25,8 @@ func _on_StateMachine_transitioned(state_name, previous_state_name):
 					play("WallSlideRight")
 				elif direction == -1:
 					play("WallSlideLeft")
+		"Dash":
+			play("Dash")
 #		"Run":
 #			_spawn_dust_particle() #VERDEPOIS pensando em colocar signals nos estados mesmo
 

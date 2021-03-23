@@ -32,7 +32,7 @@ func exit() -> void:
 
 func tween_x_velocity(): 
 	tween.interpolate_property(self, "x_velocity",
-		0, 400 * player.move_direction, 0.2,
+		100 * player.move_direction, 400 * player.move_direction, 0.2,
 		Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
 	tween.start()
 
