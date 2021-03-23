@@ -34,6 +34,8 @@ var floor_h_weight = 0.5
 var hook = null
 var retract_force = 1250#1000
 
+signal direciton_changed(dir)
+
 func _draw():
 	if state_machine.state.name == "Swing":
 		draw_line(Vector2(), to_local(hook.position), Color("282828"), 2, false)
@@ -44,6 +46,9 @@ func _physics_process(delta):
 	update() #draw
 	update_wall_direction()
 	update_move_direction()
+	update_flip()
+	update_camera_h_position()
+	update_ledge_collision_h_position()
 	update_movement()
 	if check_passing_vertical_limit() == true:
 		die()
@@ -58,10 +63,17 @@ func update_movement() -> void:
 	velocity = move_and_slide(velocity, floor_normal)
 
 func update_move_direction() -> void:
-	move_direction = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
-	update_flip()
-	update_camera_h_position()
-	update_ledge_collision_h_position()
+	var new_direction# = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
+	if Input.is_action_pressed("right"):
+		new_direction = 1
+	elif Input.is_action_pressed("left"):
+		new_direction = -1
+	else:
+		new_direction = 0
+	if new_direction != move_direction:
+		emit_signal("direciton_changed", move_direction)
+		move_direction = new_direction
+	
 
 func update_flip() -> void:
 	if state_machine.state.name == "GrabLedge":
