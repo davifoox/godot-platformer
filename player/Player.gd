@@ -19,6 +19,7 @@ var wall_jump_velocity = Vector2(150, -270)
 
 var gravity = 1000
 var max_y_velocity = 300
+var push_down_speed = 1500
 var acc = 1800
 var max_speed = 100
 var jump_force = 270
