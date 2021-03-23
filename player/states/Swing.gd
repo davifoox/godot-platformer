@@ -2,6 +2,7 @@ class_name Swing
 extends PlayerState
 
 var swing_impulse = 100
+var swing_friction = 25
 
 func enter(_msg := {}) -> void:
 	pass
@@ -16,6 +17,7 @@ func physics_update(delta: float) -> void:
 	var angle = acos(radius.dot(player.velocity) / (radius.length() * player.velocity.length()))
 	var rad_velocity = cos(angle) * player.velocity.length()
 	#lerp(player.velocity, Vector2.ZERO, 1) tentando colocar uma fircção que pare de ficar balançando
+	apply_friciton(delta)
 	
 	player.velocity += radius.normalized() * -rad_velocity
 	player.velocity += (player.hook.position - player.global_position).normalized() * delta# * player.retract_force * delta
@@ -31,6 +33,7 @@ func physics_update(delta: float) -> void:
 	if player.velocity.x != 0:
 		player.move_direction = sign(player.velocity.x)
 		
+		
 	if Input.is_action_just_pressed("down"):
 		player.velocity.y = 0
 	
@@ -39,3 +42,14 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Jump")
 	if Input.is_action_just_pressed("down"):
 		state_machine.transition_to("Fall")
+
+func apply_friciton(delta):
+	print(player.velocity.x)
+	
+	if abs(player.velocity.x) < 1:
+		return
+	if player.move_direction == 1 and !Input.is_action_pressed("right"):
+		player.velocity.x -= swing_friction * delta
+	elif player.move_direction == -1 and !Input.is_action_pressed("left"):
+		player.velocity.x += swing_friction * delta
+			
