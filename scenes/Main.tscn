@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tilesets/tileset-01/tileset-01.tres" type="TileSet" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hook/Hook.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/LevelManager.gd" type="Script" id=4]
 [ext_resource path="res://tilesets/tileset-01/tileset-01.png" type="Texture" id=5]
+[ext_resource path="res://sprites/white16x16.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 90 )
@@ -52,6 +53,16 @@ tracks/0/keys = {
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.898039, 0.772549, 1, 1 )
+
+[node name="SpriteBG" type="Sprite" parent="."]
+modulate = Color( 0.662745, 0.662745, 0.662745, 1 )
+position = Vector2( 160, 100 )
+scale = Vector2( 20, 12.5 )
+z_index = -1
+texture = ExtResource( 6 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )

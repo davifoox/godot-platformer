@@ -25,7 +25,7 @@ extents = Vector2( 4, 6 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2, 2 )
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=3]
 resource_name = "Dash"
 length = 0.1
 tracks/0/type = "value"
@@ -41,7 +41,7 @@ tracks/0/keys = {
 "values": [ 16 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -56,8 +56,7 @@ tracks/0/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "GrabLedge"
+[sub_resource type="Animation" id=5]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -72,7 +71,7 @@ tracks/0/keys = {
 "values": [ 14 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -88,7 +87,7 @@ tracks/0/keys = {
 "values": [ 0, 2 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -103,7 +102,7 @@ tracks/0/keys = {
 "values": [ 10 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -119,8 +118,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "Swing"
+[sub_resource type="Animation" id=9]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -135,7 +133,7 @@ tracks/0/keys = {
 "values": [ 15 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -150,7 +148,7 @@ tracks/0/keys = {
 "values": [ 13 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -165,7 +163,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=12]
 resource_name = "Dash"
 length = 0.2
 tracks/0/type = "value"
@@ -193,7 +191,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.75, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=13]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -220,7 +218,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.75, 1.25 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=14]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -247,7 +245,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=15]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -274,7 +272,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=16]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -301,7 +299,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -328,7 +326,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=18]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -355,7 +353,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=19]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -399,7 +397,6 @@ disabled = true
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 17
-frame = 16
 
 [node name="TargetFinder" type="Sprite" parent="."]
 visible = false
@@ -442,26 +439,26 @@ script = ExtResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
-anims/Dash = SubResource( 18 )
-anims/Fall = SubResource( 3 )
-anims/GrabLedge = SubResource( 4 )
-anims/Idle = SubResource( 5 )
-anims/Jump = SubResource( 6 )
-anims/Run = SubResource( 7 )
-anims/Swing = SubResource( 8 )
-anims/WallJump = SubResource( 9 )
-anims/WallSlide = SubResource( 10 )
+anims/Dash = SubResource( 3 )
+anims/Fall = SubResource( 4 )
+anims/GrabLedge = SubResource( 5 )
+anims/Idle = SubResource( 6 )
+anims/Jump = SubResource( 7 )
+anims/Run = SubResource( 8 )
+anims/Swing = SubResource( 9 )
+anims/WallJump = SubResource( 10 )
+anims/WallSlide = SubResource( 11 )
 script = ExtResource( 11 )
 
 [node name="SpriteDistortionPlayer" type="AnimationPlayer" parent="."]
-anims/Dash = SubResource( 19 )
-anims/Fall = SubResource( 11 )
-anims/HitFloor = SubResource( 12 )
-anims/Jump = SubResource( 13 )
-anims/Reset = SubResource( 14 )
-anims/WallJump = SubResource( 15 )
-anims/WallSlideLeft = SubResource( 16 )
-anims/WallSlideRight = SubResource( 17 )
+anims/Dash = SubResource( 12 )
+anims/Fall = SubResource( 13 )
+anims/HitFloor = SubResource( 14 )
+anims/Jump = SubResource( 15 )
+anims/Reset = SubResource( 16 )
+anims/WallJump = SubResource( 17 )
+anims/WallSlideLeft = SubResource( 18 )
+anims/WallSlideRight = SubResource( 19 )
 script = ExtResource( 15 )
 
 [node name="ParticleSpawner" type="Node" parent="."]
