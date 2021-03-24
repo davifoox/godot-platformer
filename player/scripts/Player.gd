@@ -49,7 +49,6 @@ func _physics_process(delta):
 	update() #draw
 	_update_wall_direction()
 	_update_camera_h_position()
-	_update_ledge_collision_h_position()
 	if _check_passing_vertical_limit() == true:
 		_die()
 
@@ -126,6 +125,7 @@ func set_move_direction(value: int):
 	if value != move_direction:
 		move_direction = value
 		_update_flip()
+		_update_ledge_collision_h_position()
 		if sprite_distortion_player != null:
 			sprite_distortion_player.direction = move_direction
 		if particle_spawner != null:
