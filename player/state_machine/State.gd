@@ -31,3 +31,7 @@ func enter(_msg := {}) -> void:
 # to clean up the state.
 func exit() -> void:
 	pass
+
+
+func manage_transition() -> void:
+	pass

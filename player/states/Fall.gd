@@ -32,7 +32,8 @@ func physics_update(delta: float) -> void:
 	
 	#move
 	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
-		
+
+func manage_transition() -> void:
 	if player.check_is_on_floor():
 		state_machine.transition_to("Idle")
 	elif !player.coyote_timer.is_stopped() and (Input.is_action_just_pressed("action1") or !player.jump_buffer.is_stopped()):

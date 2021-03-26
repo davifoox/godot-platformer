@@ -23,10 +23,11 @@ func physics_update(delta: float) -> void:
 	
 	#move
 	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
-	
+
+func manage_transition() -> void:
 	if player.hook != null and Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Swing")
-	
+		
 func exit() -> void:
 	tween.stop_all()
 

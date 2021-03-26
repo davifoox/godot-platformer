@@ -11,6 +11,7 @@ func physics_update(delta: float) -> void:
 	#move
 	player.velocity = player.move_and_slide_with_snap(player.velocity,Vector2(0,8), player.floor_normal)
 	
+func manage_transition() -> void:
 	if Input.is_action_pressed("left"):
 		state_machine.transition_to("Run")
 	elif Input.is_action_pressed("right"):

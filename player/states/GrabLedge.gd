@@ -12,12 +12,12 @@ func physics_update(delta: float) -> void:
 	
 	#move
 	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
-	
+
+func manage_transition() -> void:
 	if Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Jump")
 	elif Input.is_action_just_pressed("down"):
 		state_machine.transition_to("WallSlide")
-
 
 func exit() -> void:
 	player.wall_slide_cooldown.start()

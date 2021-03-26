@@ -39,17 +39,8 @@ func physics_update(delta: float) -> void:
 	
 	#move
 	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
-	
-	if Input.is_action_just_pressed("action1"):
-		state_machine.transition_to("Jump")
-	elif Input.is_action_just_pressed("down"):
-		state_machine.transition_to("Fall")
-	elif Input.is_action_just_pressed("action2"):
-		state_machine.transition_to("Dash")
 
 func apply_friciton(delta):
-	#print(player.velocity.x)
-	
 	if abs(player.velocity.x) > 0.5:
 		
 		if player.move_direction == 1 and !Input.is_action_pressed("right"):
@@ -58,6 +49,14 @@ func apply_friciton(delta):
 			player.velocity.x += swing_friction * delta
 	else:
 		player.velocity.x = 0
+
+func manage_transition() -> void:
+	if Input.is_action_just_pressed("action1"):
+		state_machine.transition_to("Jump")
+	elif Input.is_action_just_pressed("down"):
+		state_machine.transition_to("Fall")
+	elif Input.is_action_just_pressed("action2"):
+		state_machine.transition_to("Dash")
 
 func exit() -> void:
 	player.sprite.rotation_degrees = 0

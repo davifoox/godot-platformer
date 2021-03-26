@@ -31,6 +31,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
+	state.manage_transition()
 
 
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:

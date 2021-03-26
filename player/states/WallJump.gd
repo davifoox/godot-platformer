@@ -24,6 +24,7 @@ func physics_update(delta: float) -> void:
 	#move
 	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
 
+func manage_transition() -> void:
 	if player.wall_jump_cooldown.is_stopped():
 		state_machine.transition_to("Fall")
 	if player.check_is_on_floor():

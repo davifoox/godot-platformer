@@ -31,6 +31,7 @@ func physics_update(delta: float) -> void:
 	#move
 	player.velocity = player.move_and_slide(player.velocity, player.floor_normal)
 
+func manage_transition() -> void:
 	if player.velocity.y >= 0:
 		state_machine.transition_to("Fall")
 	elif player.wall_direction != 0 and player.wall_slide_cooldown.is_stopped():
@@ -39,4 +40,3 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Swing")
 	elif Input.is_action_just_pressed("action2"):
 		state_machine.transition_to("Dash")
-		
