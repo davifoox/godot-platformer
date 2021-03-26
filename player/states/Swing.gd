@@ -42,8 +42,10 @@ func physics_update(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("action1"):
 		state_machine.transition_to("Jump")
-	if Input.is_action_just_pressed("down"):
+	elif Input.is_action_just_pressed("down"):
 		state_machine.transition_to("Fall")
+	elif Input.is_action_just_pressed("action2"):
+		state_machine.transition_to("Dash")
 
 func apply_friciton(delta):
 	#print(player.velocity.x)

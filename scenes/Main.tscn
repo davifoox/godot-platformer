@@ -52,7 +52,7 @@ tracks/0/keys = {
 "values": [ Vector2( 200, 104 ), Vector2( 120, 104 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=10]
+[sub_resource type="CanvasItemMaterial" id=7]
 blend_mode = 1
 
 [node name="Main" type="Node2D"]
@@ -145,6 +145,6 @@ anims/move = SubResource( 6 )
 [node name="Light" type="Sprite" parent="."]
 visible = false
 modulate = Color( 1, 0.870588, 0.431373, 1 )
-material = SubResource( 10 )
+material = SubResource( 7 )
 position = Vector2( 160, 8 )
 texture = ExtResource( 7 )
