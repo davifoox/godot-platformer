@@ -7,7 +7,7 @@ onready var right_wall_raycasts: Node2D = $WallRaycasts/RightWallRaycasts
 onready var raycast_down_center: RayCast2D = $FloorRaycasts/RayCastCenter
 onready var sprite: Sprite = $Sprite
 onready var ledge_collision: CollisionShape2D = $LedgeCollision
-onready var camera: Camera2D = $Camera2D
+#onready var camera: Camera2D = $Camera2D
 onready var wall_slide_cooldown: Timer = $Timers/WallSlideCooldown
 onready var wall_jump_cooldown: Timer = $Timers/WallJumpCooldown
 onready var coyote_timer: Timer = $Timers/CoyoteTimer
@@ -48,7 +48,7 @@ func _physics_process(delta):
 	
 	update() #draw
 	_update_wall_direction()
-	_update_camera_h_position()
+#	_update_camera_h_position()
 	if _check_passing_vertical_limit() == true:
 		_die()
 
@@ -60,10 +60,10 @@ func _update_flip() -> void:
 	elif move_direction == -1:
 		sprite.flip_h = true
 		
-func _update_camera_h_position() -> void:
-	var speed = 0.025
-	if move_direction != 0 and wall_direction == 0:
-		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
+#func _update_camera_h_position() -> void:
+#	var speed = 0.025
+#	if move_direction != 0 and wall_direction == 0:
+#		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
 
 func _update_ledge_collision_h_position() -> void:
 	if move_direction != 0 and state_machine.state.name != "GrabLedge":

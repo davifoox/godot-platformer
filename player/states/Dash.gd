@@ -12,6 +12,7 @@ func _ready():
 func enter(_msg := {}) -> void:
 	tween.stop_all()
 	tween_x_velocity()
+	GameEvents.emit_signal("screen_shaked", 0.75, 0.2)
 	
 func physics_update(delta: float) -> void:
 	#apply gravity

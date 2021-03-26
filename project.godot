@@ -19,10 +19,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/states/Fall.gd"
 }, {
+"base": "GameplayCamera",
+"class": "FollowCamera",
+"language": "GDScript",
+"path": "res://player/camera/FollowCamera.gd"
+}, {
+"base": "Camera2D",
+"class": "GameplayCamera",
+"language": "GDScript",
+"path": "res://player/camera/GameplayCamera.gd"
+}, {
 "base": "PlayerState",
 "class": "GrabLedge",
 "language": "GDScript",
 "path": "res://player/states/GrabLedge.gd"
+}, {
+"base": "GameplayCamera",
+"class": "GridCamera",
+"language": "GDScript",
+"path": "res://player/camera/GridCamera.gd"
 }, {
 "base": "PlayerState",
 "class": "Idle",
@@ -77,7 +92,10 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Dash": "",
 "Fall": "",
+"FollowCamera": "",
+"GameplayCamera": "",
 "GrabLedge": "",
+"GridCamera": "",
 "Idle": "",
 "Jump": "",
 "Player": "",

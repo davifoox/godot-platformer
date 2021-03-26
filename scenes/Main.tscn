@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://tilesets/tileset-01/tileset-01.tres" type="TileSet" id=1]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://tilesets/tileset-01/tileset-01.png" type="Texture" id=5]
 [ext_resource path="res://sprites/white16x16.png" type="Texture" id=6]
 [ext_resource path="res://sprites/light.png" type="Texture" id=7]
+[ext_resource path="res://player/camera/GridCamera.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 90 )
@@ -148,3 +149,8 @@ modulate = Color( 1, 0.870588, 0.431373, 1 )
 material = SubResource( 7 )
 position = Vector2( 160, 8 )
 texture = ExtResource( 7 )
+
+[node name="GridCamera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 8 )

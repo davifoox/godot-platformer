@@ -517,11 +517,6 @@ one_shot = true
 [node name="JumpBuffer" type="Timer" parent="Timers"]
 wait_time = 0.2
 one_shot = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_top = 0
-limit_bottom = 180
-offset_h = 1.0
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
 [connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
