@@ -32,7 +32,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( -2, -2 ),
 "update": 0,
 "values": [ Vector2( 280, 136 ), Vector2( 280, 56 ) ]
 }
@@ -48,7 +48,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"transitions": PoolRealArray( -2, -2 ),
 "update": 0,
 "values": [ Vector2( 200, 104 ), Vector2( 120, 104 ) ]
 }
@@ -104,7 +104,7 @@ shape_visible = false
 action = "action1"
 
 [node name="MovingPlatform1" type="KinematicBody2D" parent="."]
-position = Vector2( 280, 56 )
+position = Vector2( 280, 136 )
 collision_mask = 0
 motion/sync_to_physics = true
 
@@ -124,7 +124,7 @@ playback_speed = 0.25
 anims/move = SubResource( 5 )
 
 [node name="MovingPlatform2" type="KinematicBody2D" parent="."]
-position = Vector2( 120, 104 )
+position = Vector2( 200, 104 )
 collision_mask = 0
 motion/sync_to_physics = true
 
