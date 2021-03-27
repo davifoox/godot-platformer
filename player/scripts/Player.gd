@@ -5,6 +5,8 @@ onready var state_machine: StateMachine = $StateMachine
 onready var left_wall_raycasts: Node2D = $WallRaycasts/LeftWallRaycasts
 onready var right_wall_raycasts: Node2D = $WallRaycasts/RightWallRaycasts
 onready var raycast_down_center: RayCast2D = $FloorRaycasts/RayCastCenter
+onready var raycast_down_left: RayCast2D = $FloorRaycasts/RayCastLeft
+onready var raycast_down_right: RayCast2D = $FloorRaycasts/RayCastRight
 onready var sprite: Sprite = $Sprite
 onready var ledge_collision: CollisionShape2D = $LedgeCollision
 #onready var camera: Camera2D = $Camera2D
@@ -53,7 +55,7 @@ func _physics_process(delta):
 		_die()
 
 func _update_flip() -> void:
-	if state_machine.state.name == "GrabLedge":
+	if state_machine.state.name == "LedgeGrab":
 		return
 	if move_direction == 1:
 		sprite.flip_h = false
@@ -66,7 +68,7 @@ func _update_flip() -> void:
 #		camera.offset_h = lerp(camera.offset_h, move_direction, speed)
 
 func _update_ledge_collision_h_position() -> void:
-	if move_direction != 0 and state_machine.state.name != "GrabLedge":
+	if move_direction != 0 and state_machine.state.name != "LedgeGrab":
 		if move_direction == 1:
 			ledge_collision.position = Vector2(6,-13)
 		elif move_direction == -1:
@@ -104,8 +106,11 @@ func check_close_to_floor():
 func check_is_on_floor() -> bool:
 	return is_on_floor()
 	
-func activate_ledge_collision(value: bool) -> void:
-	ledge_collision.disabled = !value
+func check_is_on_platform_edge() -> bool:
+	if !raycast_down_center.is_colliding():
+		if raycast_down_left.is_colliding() or raycast_down_right.is_colliding():
+			return true
+	return false
 
 func check_is_on_ledge() -> bool:
 	if wall_direction == 1:
@@ -117,7 +122,10 @@ func check_is_on_ledge() -> bool:
 			if left_wall_raycasts.get_child(1).is_colliding(): #bottom raycast
 				return true
 	return false
-
+	
+func activate_ledge_collision(value: bool) -> void:
+	ledge_collision.disabled = !value
+	
 func _on_TargetFinder_target_changed(current_target):
 	hook = current_target
 

@@ -1,4 +1,4 @@
-class_name GrabLedge
+class_name LedgeGrab
 extends PlayerState
 
 func enter(_msg := {}) -> void:

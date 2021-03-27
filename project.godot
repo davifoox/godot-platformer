@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://player/states/Dash.gd"
 }, {
 "base": "PlayerState",
+"class": "EdgeBalance",
+"language": "GDScript",
+"path": "res://player/states/EdgeBalance.gd"
+}, {
+"base": "PlayerState",
 "class": "Fall",
 "language": "GDScript",
 "path": "res://player/states/Fall.gd"
@@ -28,11 +33,6 @@ _global_script_classes=[ {
 "class": "GameplayCamera",
 "language": "GDScript",
 "path": "res://player/camera/GameplayCamera.gd"
-}, {
-"base": "PlayerState",
-"class": "GrabLedge",
-"language": "GDScript",
-"path": "res://player/states/GrabLedge.gd"
 }, {
 "base": "GameplayCamera",
 "class": "GridCamera",
@@ -48,6 +48,11 @@ _global_script_classes=[ {
 "class": "Jump",
 "language": "GDScript",
 "path": "res://player/states/Jump.gd"
+}, {
+"base": "Reference",
+"class": "LedgeGrab",
+"language": "GDScript",
+"path": "res://player/states/LedgeGrab.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -91,13 +96,14 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Dash": "",
+"EdgeBalance": "",
 "Fall": "",
 "FollowCamera": "",
 "GameplayCamera": "",
-"GrabLedge": "",
 "GridCamera": "",
 "Idle": "",
 "Jump": "",
+"LedgeGrab": "",
 "Player": "",
 "PlayerState": "",
 "Run": "",

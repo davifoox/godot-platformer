@@ -34,7 +34,7 @@ func manage_transition() -> void:
 		elif player.move_direction == 1 and !Input.is_action_pressed("right"):
 			state_machine.transition_to("WallJump")
 	elif player.check_is_on_ledge() == true and player.velocity.y > 0 and player.check_close_to_floor() == false:
-		state_machine.transition_to("GrabLedge")
+		state_machine.transition_to("LedgeGrab")
 		
 func exit() -> void:
 	player.wall_slide_cooldown.start()

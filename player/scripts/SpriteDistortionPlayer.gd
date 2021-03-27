@@ -20,7 +20,7 @@ func _on_StateMachine_transitioned(state_name, previous_state_name):
 		"WallJump":
 			play("WallJump")
 		"WallSlide":
-			if previous_state_name != "GrabLedge":
+			if previous_state_name != "LedgeGrab":
 				if direction == 1:
 					play("WallSlideRight")
 				elif direction == -1:
