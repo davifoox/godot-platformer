@@ -12,6 +12,8 @@ func physics_update(delta: float) -> void:
 		player.velocity.x = min(player.velocity.x + player.acc * delta, player.max_speed)
 	if player.velocity.x != 0:
 		player.move_direction = sign(player.velocity.x)
+	if Input.is_action_just_pressed("action1"):
+		player.jump_buffer.start()
 	
 	#move
 	player.velocity = player.move_and_slide_with_snap(player.velocity,Vector2(0,8), player.floor_normal)

@@ -4,6 +4,7 @@ extends PlayerState
 var air_h_weight: float
 
 func enter(_msg := {}) -> void:
+	player.coyote_timer.stop()
 	player.velocity.y = -player.jump_force
 	if state_machine.last_state_name == "Swing":
 		air_h_weight = player.air_h_weight_small
