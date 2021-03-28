@@ -427,6 +427,7 @@ max_distance = 75
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 initial_state = NodePath("Idle")
+print_states = false
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 4 )

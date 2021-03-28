@@ -7,7 +7,7 @@ extends Node
 signal transitioned(state_name, previous_state_name)
 
 export var initial_state := NodePath()
-
+export var print_states: bool = true
 onready var state: State = get_node(initial_state)
 onready var last_state_name: String
 
@@ -46,5 +46,6 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 
 
 func _on_StateMachine_transitioned(state_name, previous_state_name):
-	print(state_name)
-	pass
+	if print_states:
+		print(state_name)
+
