@@ -80,6 +80,11 @@ _global_script_classes=[ {
 "path": "res://player/state_machine/StateMachine.gd"
 }, {
 "base": "PlayerState",
+"class": "Stop",
+"language": "GDScript",
+"path": "res://player/states/Stop.gd"
+}, {
+"base": "PlayerState",
 "class": "Swing",
 "language": "GDScript",
 "path": "res://player/states/Swing.gd"
@@ -109,6 +114,7 @@ _global_script_class_icons={
 "Run": "",
 "State": "",
 "StateMachine": "",
+"Stop": "",
 "Swing": "",
 "WallJump": "",
 "WallSlide": ""

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://player/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://player/scripts/ParticleSpawner.gd" type="Script" id=17]
 [ext_resource path="res://player/states/Dash.gd" type="Script" id=18]
 [ext_resource path="res://player/states/EdgeBalance.gd" type="Script" id=19]
+[ext_resource path="res://player/states/Stop.gd" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
@@ -134,6 +135,23 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 4, 5, 6, 7, 8, 9 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "Stop"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 2 ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -459,6 +477,9 @@ script = ExtResource( 10 )
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource( 18 )
 
+[node name="Stop" type="Node" parent="StateMachine"]
+script = ExtResource( 20 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
 anims/Dash = SubResource( 3 )
@@ -468,6 +489,7 @@ anims/Idle = SubResource( 6 )
 anims/Jump = SubResource( 7 )
 anims/LedgeGrab = SubResource( 8 )
 anims/Run = SubResource( 9 )
+anims/Stop = SubResource( 21 )
 anims/Swing = SubResource( 10 )
 anims/WallJump = SubResource( 11 )
 anims/WallSlide = SubResource( 12 )
@@ -551,8 +573,8 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
-[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="SpriteDistortionPlayer" method="_on_StateMachine_transitioned"]
