@@ -51,7 +51,7 @@ func _physics_process(delta):
 	update() #draw
 	_update_wall_direction()
 #	_update_camera_h_position()
-	if _check_passing_vertical_limit() == true and state_machine.state.name != "Die":
+	if _check_passing_vertical_limit() == true:
 		_take_hit()
 
 func _update_flip() -> void:
@@ -94,6 +94,8 @@ func _check_passing_vertical_limit() -> bool:
 	return false
 
 func _take_hit():
+	if state_machine.state.name == "Die":
+		return
 	GameEvents.emit_signal("screen_shaked", 0.75, 0.2)
 	GameEvents.emit_signal("player_died")
 
