@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://player/states/Dash.gd"
 }, {
 "base": "PlayerState",
+"class": "Die",
+"language": "GDScript",
+"path": "res://player/states/Die.gd"
+}, {
+"base": "PlayerState",
 "class": "EdgeBalance",
 "language": "GDScript",
 "path": "res://player/states/EdgeBalance.gd"
@@ -24,20 +29,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/states/Fall.gd"
 }, {
-"base": "GameplayCamera",
+"base": "Reference",
 "class": "FollowCamera",
 "language": "GDScript",
-"path": "res://player/camera/FollowCamera.gd"
+"path": "res://camera/FollowCamera.gd"
 }, {
-"base": "Camera2D",
+"base": "Reference",
 "class": "GameplayCamera",
 "language": "GDScript",
-"path": "res://player/camera/GameplayCamera.gd"
+"path": "res://camera/GameplayCamera.gd"
 }, {
-"base": "GameplayCamera",
+"base": "Reference",
 "class": "GridCamera",
 "language": "GDScript",
-"path": "res://player/camera/GridCamera.gd"
+"path": "res://camera/GridCamera.gd"
 }, {
 "base": "PlayerState",
 "class": "Idle",
@@ -101,6 +106,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Dash": "",
+"Die": "",
 "EdgeBalance": "",
 "Fall": "",
 "FollowCamera": "",
@@ -123,7 +129,7 @@ _global_script_class_icons={
 [application]
 
 config/name="godot-platformer"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/Demo.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://sprites/icon-512x512.png"
 
@@ -208,7 +214,12 @@ action2={
 
 2d_physics/layer_1="World"
 2d_physics/layer_2="Player"
-2d_physics/layer_3="Hook"
+2d_physics/layer_3="PlayerHurtbox"
+2d_physics/layer_4="PlayerHitbox"
+2d_physics/layer_5="Enemy"
+2d_physics/layer_6="EnemyHurtbox"
+2d_physics/layer_7="EnemyHitbox"
+2d_physics/layer_8="SoftCollision"
 
 [rendering]
 

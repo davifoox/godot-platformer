@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://tilesets/tileset-01/tileset-01.tres" type="TileSet" id=1]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://hook/Hook.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scripts/LevelManager.gd" type="Script" id=4]
-[ext_resource path="res://tilesets/tileset-01/tileset-01.png" type="Texture" id=5]
-[ext_resource path="res://sprites/white16x16.png" type="Texture" id=6]
-[ext_resource path="res://sprites/light.png" type="Texture" id=7]
-[ext_resource path="res://player/camera/GridCamera.gd" type="Script" id=8]
+[ext_resource path="res://tilesets/tileset-01/tileset-01.png" type="Texture" id=2]
+[ext_resource path="res://sprites/light.png" type="Texture" id=3]
+[ext_resource path="res://sprites/white16x16.png" type="Texture" id=4]
+[ext_resource path="res://scripts/LevelManager.gd" type="Script" id=5]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hook/Hook.tscn" type="PackedScene" id=7]
+[ext_resource path="res://camera/GridCamera.gd" type="Script" id=8]
+[ext_resource path="res://enemies/Spike.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 90 )
@@ -56,8 +57,8 @@ tracks/0/keys = {
 [sub_resource type="CanvasItemMaterial" id=7]
 blend_mode = 1
 
-[node name="Main" type="Node2D"]
-script = ExtResource( 4 )
+[node name="Demo" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
@@ -68,7 +69,7 @@ modulate = Color( 0.662745, 0.662745, 0.662745, 1 )
 position = Vector2( 160, 100 )
 scale = Vector2( 20, 12.5 )
 z_index = -1
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -76,13 +77,13 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 196613, 47, 0, 196614, 47, 2, 196621, 47, 196611, 262149, 47, 65536, 262150, 47, 65538, 327680, 47, 0, 327681, 47, 2, 327685, 47, 65536, 327686, 47, 65538, 393216, 47, 65536, 393217, 47, 65538, 393221, 47, 65536, 393222, 47, 65538, 393229, 47, 196611, 458752, 47, 65536, 458753, 47, 65538, 458757, 47, 131072, 458758, 47, 131074, 524288, 47, 65536, 524289, 47, 65538, 524298, 47, 3, 589824, 47, 65536, 589825, 47, 65538, 589834, 47, 65539, 589836, 47, 0, 589837, 47, 2, 655360, 47, 65536, 655361, 47, 131077, 655362, 47, 1, 655363, 47, 1, 655364, 47, 1, 655365, 47, 1, 655366, 47, 1, 655367, 47, 1, 655368, 47, 1, 655369, 47, 1, 655370, 47, 131080, 655371, 47, 1, 655372, 47, 131078, 655373, 47, 131077, 655374, 47, 1, 655375, 47, 1, 655376, 47, 1, 655377, 47, 1, 655378, 47, 1, 655379, 47, 1, 655380, 47, 1, 655381, 47, 1, 655382, 47, 1, 655383, 47, 1, 655384, 47, 1, 655385, 47, 1, 655386, 47, 2, 655399, 47, 0, 655400, 47, 1, 655401, 47, 1, 655402, 47, 1, 655403, 47, 1, 655404, 47, 1, 655405, 47, 1, 655406, 47, 1, 655407, 47, 1, 655408, 47, 1, 655409, 47, 1, 655410, 47, 1, 655411, 47, 1, 655412, 47, 1, 655413, 47, 1, 655414, 47, 1, 655415, 47, 1, 655416, 47, 1, 655417, 47, 1, 655418, 47, 1, 655419, 47, 1, 655420, 47, 1, 655421, 47, 1, 655422, 47, 1, 655423, 47, 1, 655424, 47, 1, 655425, 47, 1, 655426, 47, 1, 655427, 47, 1, 655428, 47, 1, 655429, 47, 1, 655430, 47, 1, 655431, 47, 1, 655432, 47, 1, 655433, 47, 1, 655434, 47, 1, 655435, 47, 1, 655436, 47, 1, 655437, 47, 1, 655438, 47, 1, 655439, 47, 1, 655440, 47, 1, 655441, 47, 1, 655442, 47, 1, 655443, 47, 1, 655444, 47, 1, 655445, 47, 1, 655446, 47, 1, 655447, 47, 1, 655448, 47, 1, 655449, 47, 1, 655450, 47, 1, 655451, 47, 1, 655452, 47, 1, 655453, 47, 1, 655454, 47, 1, 655455, 47, 1, 655456, 47, 1, 655457, 47, 1, 655458, 47, 1, 655459, 47, 1, 655460, 47, 1, 655461, 47, 1, 655462, 47, 1, 655463, 47, 1, 655464, 47, 1, 655465, 47, 1, 655466, 47, 1, 655467, 47, 1, 655468, 47, 1, 655469, 47, 1, 655470, 47, 1, 655471, 47, 1, 655472, 47, 1, 655473, 47, 1, 655474, 47, 1, 655475, 47, 1, 655476, 47, 1, 655477, 47, 2, 720896, 47, 131072, 720897, 47, 131073, 720898, 47, 131073, 720899, 47, 131073, 720900, 47, 131073, 720901, 47, 131073, 720902, 47, 131073, 720903, 47, 131073, 720904, 47, 131073, 720905, 47, 131073, 720906, 47, 131073, 720907, 47, 131073, 720908, 47, 131073, 720909, 47, 131073, 720910, 47, 131073, 720911, 47, 131073, 720912, 47, 131073, 720913, 47, 131073, 720914, 47, 131073, 720915, 47, 131073, 720916, 47, 131073, 720917, 47, 131073, 720918, 47, 131073, 720919, 47, 131073, 720920, 47, 131073, 720921, 47, 131073, 720922, 47, 131074, 720935, 47, 131072, 720936, 47, 131073, 720937, 47, 131073, 720938, 47, 131073, 720939, 47, 131073, 720940, 47, 131073, 720941, 47, 131073, 720942, 47, 131073, 720943, 47, 131073, 720944, 47, 131073, 720945, 47, 131073, 720946, 47, 131073, 720947, 47, 131073, 720948, 47, 131073, 720949, 47, 131073, 720950, 47, 131073, 720951, 47, 131073, 720952, 47, 131073, 720953, 47, 131073, 720954, 47, 131073, 720955, 47, 131073, 720956, 47, 131073, 720957, 47, 131073, 720958, 47, 131073, 720959, 47, 131073, 720960, 47, 131073, 720961, 47, 131073, 720962, 47, 131073, 720963, 47, 131073, 720964, 47, 131073, 720965, 47, 131073, 720966, 47, 131073, 720967, 47, 131073, 720968, 47, 131073, 720969, 47, 131073, 720970, 47, 131073, 720971, 47, 131073, 720972, 47, 131073, 720973, 47, 131073, 720974, 47, 131073, 720975, 47, 131073, 720976, 47, 131073, 720977, 47, 131073, 720978, 47, 131073, 720979, 47, 131073, 720980, 47, 131073, 720981, 47, 131073, 720982, 47, 131073, 720983, 47, 131073, 720984, 47, 131073, 720985, 47, 131073, 720986, 47, 131073, 720987, 47, 131073, 720988, 47, 131073, 720989, 47, 131073, 720990, 47, 131073, 720991, 47, 131073, 720992, 47, 131073, 720993, 47, 131073, 720994, 47, 131073, 720995, 47, 131073, 720996, 47, 131073, 720997, 47, 131073, 720998, 47, 131073, 720999, 47, 131073, 721000, 47, 131073, 721001, 47, 131073, 721002, 47, 131073, 721003, 47, 131073, 721004, 47, 131073, 721005, 47, 131073, 721006, 47, 131073, 721007, 47, 131073, 721008, 47, 131073, 721009, 47, 131073, 721010, 47, 131073, 721011, 47, 131073, 721012, 47, 131073, 721013, 47, 131074 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 16, 64 )
 
-[node name="Hook1" parent="." instance=ExtResource( 3 )]
+[node name="Hook1" parent="." instance=ExtResource( 7 )]
 position = Vector2( 160, 8 )
 
-[node name="Hook2" parent="." instance=ExtResource( 3 )]
+[node name="Hook2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 528, 80 )
 
 [node name="TouchScreenButtons" type="CanvasLayer" parent="."]
@@ -116,7 +117,7 @@ visible = false
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="MovingPlatform1"]
-texture = ExtResource( 5 )
+texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 48, 16, 16 )
 
@@ -136,7 +137,7 @@ visible = false
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="MovingPlatform2"]
-texture = ExtResource( 5 )
+texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 48, 48, 16, 16 )
 
@@ -151,10 +152,24 @@ visible = false
 modulate = Color( 1, 0.870588, 0.431373, 1 )
 material = SubResource( 7 )
 position = Vector2( 160, 8 )
-texture = ExtResource( 7 )
+texture = ExtResource( 3 )
 
 [node name="GridCamera" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
 script = ExtResource( 8 )
-target = NodePath("../Player")
+target = NodePath("../../Demo/Player")
+
+[node name="SpikesContainer" type="Node2D" parent="."]
+
+[node name="Spike1" parent="SpikesContainer" instance=ExtResource( 9 )]
+position = Vector2( 56, 159 )
+
+[node name="Spike2" parent="SpikesContainer" instance=ExtResource( 9 )]
+position = Vector2( 60, 159 )
+
+[node name="Spike3" parent="SpikesContainer" instance=ExtResource( 9 )]
+position = Vector2( 64, 159 )
+
+[node name="Spike4" parent="SpikesContainer" instance=ExtResource( 9 )]
+position = Vector2( 68, 159 )

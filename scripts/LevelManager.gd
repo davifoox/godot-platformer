@@ -11,4 +11,5 @@ func _input(event):
 		OS.window_fullscreen = !OS.window_fullscreen
 
 func _on_player_died():
+	yield(get_tree().create_timer(0.25), "timeout")
 	get_tree().reload_current_scene()

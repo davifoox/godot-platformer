@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://player/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player.png" type="Texture" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://player/states/Dash.gd" type="Script" id=18]
 [ext_resource path="res://player/states/EdgeBalance.gd" type="Script" id=19]
 [ext_resource path="res://player/states/Stop.gd" type="Script" id=20]
+[ext_resource path="res://player/overlap/PlayerHurtbox.tscn" type="PackedScene" id=21]
+[ext_resource path="res://player/states/Die.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
@@ -137,7 +139,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=10]
 resource_name = "Stop"
 length = 1.6
 loop = true
@@ -154,7 +156,7 @@ tracks/0/keys = {
 "values": [ 0, 2 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -169,7 +171,7 @@ tracks/0/keys = {
 "values": [ 15 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -184,7 +186,7 @@ tracks/0/keys = {
 "values": [ 13 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -199,7 +201,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -226,7 +228,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.75, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -253,7 +255,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.75, 1.25 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -280,7 +282,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -307,7 +309,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -334,7 +336,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -361,7 +363,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 0.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -388,7 +390,7 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -414,6 +416,9 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.5 ), Vector2( 1, 1 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 3, 5 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
@@ -480,6 +485,9 @@ script = ExtResource( 18 )
 [node name="Stop" type="Node" parent="StateMachine"]
 script = ExtResource( 20 )
 
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource( 22 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
 anims/Dash = SubResource( 3 )
@@ -489,21 +497,21 @@ anims/Idle = SubResource( 6 )
 anims/Jump = SubResource( 7 )
 anims/LedgeGrab = SubResource( 8 )
 anims/Run = SubResource( 9 )
-anims/Stop = SubResource( 21 )
-anims/Swing = SubResource( 10 )
-anims/WallJump = SubResource( 11 )
-anims/WallSlide = SubResource( 12 )
+anims/Stop = SubResource( 10 )
+anims/Swing = SubResource( 11 )
+anims/WallJump = SubResource( 12 )
+anims/WallSlide = SubResource( 13 )
 script = ExtResource( 11 )
 
 [node name="SpriteDistortionPlayer" type="AnimationPlayer" parent="."]
-anims/Dash = SubResource( 13 )
-anims/Fall = SubResource( 14 )
-anims/HitFloor = SubResource( 15 )
-anims/Jump = SubResource( 16 )
-anims/Reset = SubResource( 17 )
-anims/WallJump = SubResource( 18 )
-anims/WallSlideLeft = SubResource( 19 )
-anims/WallSlideRight = SubResource( 20 )
+anims/Dash = SubResource( 14 )
+anims/Fall = SubResource( 15 )
+anims/HitFloor = SubResource( 16 )
+anims/Jump = SubResource( 17 )
+anims/Reset = SubResource( 18 )
+anims/WallJump = SubResource( 19 )
+anims/WallSlideLeft = SubResource( 20 )
+anims/WallSlideRight = SubResource( 21 )
 script = ExtResource( 15 )
 
 [node name="ParticleSpawner" type="Node" parent="."]
@@ -572,9 +580,17 @@ one_shot = true
 [node name="JumpBuffer" type="Timer" parent="Timers"]
 wait_time = 0.2
 one_shot = true
+
+[node name="PlayerHurtbox" parent="." instance=ExtResource( 21 )]
+visible = false
+position = Vector2( 0, 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource( 22 )
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
-[connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
-[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="SpriteDistortionPlayer" method="_on_StateMachine_transitioned"]
+[connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_PlayerHurtbox_area_entered"]

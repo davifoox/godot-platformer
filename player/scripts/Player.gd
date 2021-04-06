@@ -51,8 +51,8 @@ func _physics_process(delta):
 	update() #draw
 	_update_wall_direction()
 #	_update_camera_h_position()
-	if _check_passing_vertical_limit() == true:
-		_die()
+	if _check_passing_vertical_limit() == true and state_machine.state.name != "Die":
+		_take_hit()
 
 func _update_flip() -> void:
 	if state_machine.state.name == "LedgeGrab":
@@ -93,7 +93,8 @@ func _check_passing_vertical_limit() -> bool:
 		return true
 	return false
 
-func _die():
+func _take_hit():
+	GameEvents.emit_signal("screen_shaked", 0.75, 0.2)
 	GameEvents.emit_signal("player_died")
 
 #-------------------------------------------------------------------------------
@@ -138,3 +139,6 @@ func set_move_direction(value: int):
 			sprite_distortion_player.direction = move_direction
 		if particle_spawner != null:
 			particle_spawner.direction = move_direction
+
+func _on_PlayerHurtbox_area_entered(area):
+	_take_hit()
