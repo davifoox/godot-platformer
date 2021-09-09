@@ -28,10 +28,10 @@ func manage_transition() -> void:
 		state_machine.transition_to("Fall")
 	elif player.wall_direction == 0:
 		state_machine.transition_to("Fall")
-	elif Input.is_action_just_pressed("action1") or !player.jump_buffer.is_stopped():
-		if player.move_direction == -1 and !Input.is_action_pressed("left"):
+	elif Input.is_action_just_pressed("action1"):# or !player.jump_buffer.is_stopped():
+		if player.move_direction == -1:# and !Input.is_action_pressed("left"):
 			state_machine.transition_to("WallJump")
-		elif player.move_direction == 1 and !Input.is_action_pressed("right"):
+		elif player.move_direction == 1:# and !Input.is_action_pressed("right"):
 			state_machine.transition_to("WallJump")
 	elif player.check_is_on_ledge() == true and player.velocity.y > 0 and player.check_close_to_floor() == false:
 		state_machine.transition_to("LedgeGrab")
