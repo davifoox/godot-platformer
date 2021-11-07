@@ -1,0 +1,125 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://levels/BaseLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://enemies/Spike.tscn" type="PackedScene" id=2]
+[ext_resource path="res://hook/Hook.tscn" type="PackedScene" id=4]
+[ext_resource path="res://tilesets/tileset-01/tileset-01.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 90 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30, 90 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 60, 90 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "move"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 280, 136 ), Vector2( 280, 56 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "move"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 200, 104 ), Vector2( 120, 104 ) ]
+}
+
+[node name="Level01" instance=ExtResource( 1 )]
+
+[node name="TileMap" parent="." index="1"]
+tile_data = PoolIntArray( 196613, 47, 0, 196614, 47, 2, 196621, 47, 196611, 262149, 47, 65536, 262150, 47, 65538, 327680, 47, 0, 327681, 47, 2, 327685, 47, 65536, 327686, 47, 65538, 393216, 47, 65536, 393217, 47, 65538, 393221, 47, 65536, 393222, 47, 65538, 393229, 47, 196611, 458752, 47, 65536, 458753, 47, 65538, 458757, 47, 131072, 458758, 47, 131074, 524288, 47, 65536, 524289, 47, 65538, 524298, 47, 3, 589824, 47, 65536, 589825, 47, 65538, 589834, 47, 65539, 589836, 47, 0, 589837, 47, 2, 655360, 47, 65536, 655361, 47, 131077, 655362, 47, 1, 655363, 47, 1, 655364, 47, 1, 655365, 47, 1, 655366, 47, 1, 655367, 47, 1, 655368, 47, 1, 655369, 47, 1, 655370, 47, 131080, 655371, 47, 1, 655372, 47, 131078, 655373, 47, 131077, 655374, 47, 1, 655375, 47, 1, 655376, 47, 1, 655377, 47, 1, 655378, 47, 1, 655379, 47, 1, 655380, 47, 1, 655381, 47, 1, 655382, 47, 1, 655383, 47, 1, 655384, 47, 1, 655385, 47, 1, 655386, 47, 2, 655399, 47, 0, 655400, 47, 1, 655401, 47, 1, 655402, 47, 1, 655403, 47, 1, 655404, 47, 1, 655405, 47, 1, 655406, 47, 1, 655407, 47, 1, 655408, 47, 1, 655409, 47, 1, 655410, 47, 1, 655411, 47, 1, 655412, 47, 1, 655413, 47, 1, 655414, 47, 1, 655415, 47, 1, 655416, 47, 1, 655417, 47, 1, 655418, 47, 2, 720896, 47, 131072, 720897, 47, 131073, 720898, 47, 131073, 720899, 47, 131073, 720900, 47, 131073, 720901, 47, 131073, 720902, 47, 131073, 720903, 47, 131073, 720904, 47, 131073, 720905, 47, 131073, 720906, 47, 131073, 720907, 47, 131073, 720908, 47, 131073, 720909, 47, 131073, 720910, 47, 131073, 720911, 47, 131073, 720912, 47, 131073, 720913, 47, 131073, 720914, 47, 131073, 720915, 47, 131073, 720916, 47, 131073, 720917, 47, 131073, 720918, 47, 131073, 720919, 47, 131073, 720920, 47, 131073, 720921, 47, 131073, 720922, 47, 131074, 720935, 47, 131072, 720936, 47, 131073, 720937, 47, 131073, 720938, 47, 131073, 720939, 47, 131073, 720940, 47, 131073, 720941, 47, 131073, 720942, 47, 131073, 720943, 47, 131073, 720944, 47, 131073, 720945, 47, 131073, 720946, 47, 131073, 720947, 47, 131073, 720948, 47, 131073, 720949, 47, 131073, 720950, 47, 131073, 720951, 47, 131073, 720952, 47, 131073, 720953, 47, 131073, 720954, 47, 131074 )
+
+[node name="Player" parent="." index="2"]
+position = Vector2( 16, 64 )
+
+[node name="Left" parent="TouchScreenButtons" index="0"]
+shape = SubResource( 1 )
+
+[node name="Right" parent="TouchScreenButtons" index="1"]
+shape = SubResource( 2 )
+
+[node name="Action1" parent="TouchScreenButtons" index="2"]
+shape = SubResource( 3 )
+
+[node name="Spike1" parent="SpikesContainer" index="0" instance=ExtResource( 2 )]
+position = Vector2( 56, 159 )
+
+[node name="Spike2" parent="SpikesContainer" index="1" instance=ExtResource( 2 )]
+position = Vector2( 60, 159 )
+
+[node name="Spike3" parent="SpikesContainer" index="2" instance=ExtResource( 2 )]
+position = Vector2( 64, 159 )
+
+[node name="Spike4" parent="SpikesContainer" index="3" instance=ExtResource( 2 )]
+position = Vector2( 68, 159 )
+
+[node name="Hook1" parent="." index="6" instance=ExtResource( 4 )]
+position = Vector2( 160, 8 )
+
+[node name="Hook2" parent="." index="7" instance=ExtResource( 4 )]
+position = Vector2( 528, 80 )
+
+[node name="MovingPlatform1" type="KinematicBody2D" parent="." index="8"]
+position = Vector2( 280, 136 )
+collision_mask = 0
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform1" index="0"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="MovingPlatform1" index="1"]
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 48, 48, 16, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform1" index="2"]
+autoplay = "move"
+playback_process_mode = 0
+playback_speed = 0.25
+anims/move = SubResource( 5 )
+
+[node name="MovingPlatform2" type="KinematicBody2D" parent="." index="9"]
+position = Vector2( 200, 104 )
+collision_mask = 0
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingPlatform2" index="0"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="MovingPlatform2" index="1"]
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 48, 48, 16, 16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MovingPlatform2" index="2"]
+autoplay = "move"
+playback_process_mode = 0
+playback_speed = 0.25
+anims/move = SubResource( 6 )

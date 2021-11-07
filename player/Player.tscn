@@ -587,10 +587,11 @@ position = Vector2( 0, 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
 shape = SubResource( 22 )
+
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
-[connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
-[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="SpriteDistortionPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_PlayerHurtbox_area_entered"]

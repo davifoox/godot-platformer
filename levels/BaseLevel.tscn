@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://levels/scripts/LevelManager.gd" type="Script" id=1]
+[ext_resource path="res://ui/fonts/DigitalDiscox16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/EndScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/OptionsMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://tilesets/tileset-01/tileset-01.tres" type="TileSet" id=7]
+[ext_resource path="res://camera/GridCamera.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3 ),
+"transitions": PoolRealArray( -2, -0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -24 ), Vector2( 0, 8 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 30, 90 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30, 90 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 60, 90 )
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource( 1 )
+end_screen = ExtResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Node2D" parent="CanvasLayer"]
+
+[node name="LevelNumberLabel" type="Label" parent="CanvasLayer/UI"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 48.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 2 )
+text = "Lvl --"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UI"]
+autoplay = "show"
+anims/show = SubResource( 1 )
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 3 )]
+visible = false
+
+[node name="OptionsMenu" parent="CanvasLayer" instance=ExtResource( 5 )]
+pause_mode = 2
+visible = false
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="Player" parent="." instance=ExtResource( 6 )]
+
+[node name="TouchScreenButtons" type="CanvasLayer" parent="."]
+
+[node name="Left" type="TouchScreenButton" parent="TouchScreenButtons"]
+shape = SubResource( 2 )
+shape_visible = false
+passby_press = true
+action = "left"
+
+[node name="Right" type="TouchScreenButton" parent="TouchScreenButtons"]
+position = Vector2( 64, 0 )
+shape = SubResource( 3 )
+shape_visible = false
+passby_press = true
+action = "right"
+
+[node name="Action1" type="TouchScreenButton" parent="TouchScreenButtons"]
+position = Vector2( 200, 0 )
+shape = SubResource( 4 )
+shape_visible = false
+action = "action1"
+
+[node name="GridCamera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 8 )
+target = NodePath("../Player")
+
+[node name="SpikesContainer" type="Node2D" parent="."]

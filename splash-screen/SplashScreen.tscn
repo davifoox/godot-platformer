@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://splash-screen/davi-fox-games-logo-sound.wav" type="AudioStream" id=1]
+[ext_resource path="res://splash-screen/intro_cartridge.wav" type="AudioStream" id=2]
+[ext_resource path="res://ui/Menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://splash-screen/df-logo.png" type="Texture" id=4]
+[ext_resource path="res://splash-screen/white8x8.png" type="Texture" id=5]
+[ext_resource path="res://splash-screen/SplashScreen.gd" type="Script" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioLogo")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 1 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 160, 90 )
+
+[node name="SplashScreen" type="Node"]
+script = ExtResource( 6 )
+menu = ExtResource( 3 )
+
+[node name="SpriteBG" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 160, 92 )
+scale = Vector2( 42, 25 )
+texture = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 160, 90 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade = SubResource( 1 )
+
+[node name="NextSceneTouchButton" type="TouchScreenButton" parent="."]
+shape = SubResource( 2 )
+action = "left_mouse_button"
+
+[node name="AudioIntro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+bus = "SFX"
+
+[node name="AudioLogo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+bus = "Music"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="finished" from="AudioIntro" to="." method="_on_AudioIntro_finished"]
