@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://levels/scripts/LevelManager.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/DigitalDiscox16.tres" type="DynamicFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://tilesets/tileset-01/tileset-01.tres" type="TileSet" id=7]
 [ext_resource path="res://camera/GridCamera.gd" type="Script" id=8]
+[ext_resource path="res://items/Goal.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show"
@@ -99,3 +100,8 @@ script = ExtResource( 8 )
 target = NodePath("../Player")
 
 [node name="SpikesContainer" type="Node2D" parent="."]
+
+[node name="Goal" parent="." instance=ExtResource( 9 )]
+position = Vector2( 320, 0 )
+
+[connection signal="player_reached_goal" from="Goal" to="." method="_on_Goal_player_reached_goal"]

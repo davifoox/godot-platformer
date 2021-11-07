@@ -78,13 +78,16 @@ position = Vector2( 64, 159 )
 [node name="Spike4" parent="SpikesContainer" index="3" instance=ExtResource( 2 )]
 position = Vector2( 68, 159 )
 
-[node name="Hook1" parent="." index="6" instance=ExtResource( 4 )]
+[node name="Goal" parent="." index="6"]
+position = Vector2( 304, 152 )
+
+[node name="Hook1" parent="." index="7" instance=ExtResource( 4 )]
 position = Vector2( 160, 8 )
 
-[node name="Hook2" parent="." index="7" instance=ExtResource( 4 )]
+[node name="Hook2" parent="." index="8" instance=ExtResource( 4 )]
 position = Vector2( 528, 80 )
 
-[node name="MovingPlatform1" type="KinematicBody2D" parent="." index="8"]
+[node name="MovingPlatform1" type="KinematicBody2D" parent="." index="9"]
 position = Vector2( 280, 136 )
 collision_mask = 0
 motion/sync_to_physics = true
@@ -104,7 +107,7 @@ playback_process_mode = 0
 playback_speed = 0.25
 anims/move = SubResource( 5 )
 
-[node name="MovingPlatform2" type="KinematicBody2D" parent="." index="9"]
+[node name="MovingPlatform2" type="KinematicBody2D" parent="." index="10"]
 position = Vector2( 200, 104 )
 collision_mask = 0
 motion/sync_to_physics = true

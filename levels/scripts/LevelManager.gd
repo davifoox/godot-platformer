@@ -57,3 +57,8 @@ func _on_OptionsMenu_back_button_pressed():
 func _on_player_died():
 	yield(get_tree().create_timer(0.25), "timeout")
 	get_tree().reload_current_scene()
+
+
+func _on_Goal_player_reached_goal() -> void:
+	yield(get_tree().create_timer(0.15), "timeout")
+	load_next_scene()
