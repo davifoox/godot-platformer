@@ -39,6 +39,17 @@ extents = Vector2( 60, 90 )
 script = ExtResource( 1 )
 end_screen = ExtResource( 4 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_left = -24.0
+margin_top = -24.0
+margin_right = 344.0
+margin_bottom = 200.0
+color = Color( 0.254902, 0.686275, 0.87451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" type="Node2D" parent="CanvasLayer"]

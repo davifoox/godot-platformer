@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/fonts/DigitalDiscox16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/EndScreen.gd" type="Script" id=2]
@@ -6,21 +6,45 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
+[sub_resource type="Animation" id=2]
+resource_name = "New Anim"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -352 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
 [node name="EndScreen" type="Node"]
 script = ExtResource( 2 )
 menu = ExtResource( 3 )
 
-[node name="EndingMessageLabel" type="Label" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -27.5
-margin_top = -8.0
-margin_right = 27.5
-margin_bottom = 8.0
-custom_fonts/font = ExtResource( 1 )
-text = "The End"
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.113725, 0.113725, 0.156863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -30,13 +54,45 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -22.0
 margin_right = 64.0
-custom_styles/focus = SubResource( 1 )
-custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.784314, 0.784314, 0.784314, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 0.784314, 0.784314, 0.784314, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/focus = SubResource( 1 )
 text = "Menu"
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 2 )
+anims/RESET = SubResource( 3 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="EndingMessageLabel" type="Label" parent="Node2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = 160.0
+margin_right = 320.0
+margin_bottom = 347.0
+custom_fonts/font = ExtResource( 1 )
+text = "Créditos:
+Roberto Cavalcanti
+Breno José
+Davi Fox
+Rubens Marreira
+Vitória Ferraz
+Kárin Albuquerque
+Douglas Vinícius
+Guilherme Vinicius
+Ygor Mendes"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
