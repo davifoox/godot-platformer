@@ -24,10 +24,10 @@ func _input(event):
 	if event.is_action_pressed("esc"):
 		pause_game()
 	
-	#Just for Test
-	if event.is_action_pressed("ui_accept"):
-		load_next_scene()
-	#-------------
+#	#Just for Test
+#	if event.is_action_pressed("ui_accept"):
+#		load_next_scene()
+#	#-------------
 
 func load_next_scene():
 	if current_level_number < GameManager.total_levels_number:
