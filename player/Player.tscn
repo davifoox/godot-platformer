@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://player/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://player/overlap/PlayerHurtbox.tscn" type="PackedScene" id=21]
 [ext_resource path="res://player/states/Die.gd" type="Script" id=22]
 [ext_resource path="res://player/scarf/scarf.tscn" type="PackedScene" id=23]
+[ext_resource path="res://player/sprites/belt.png" type="Texture" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
@@ -439,6 +440,11 @@ disabled = true
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 19
+
+[node name="SpriteBelt" type="Sprite" parent="."]
+position = Vector2( 0, 1 )
+scale = Vector2( 2.125, 1.75 )
+texture = ExtResource( 24 )
 
 [node name="TargetFinder" type="Sprite" parent="."]
 visible = false
