@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://player/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://player/states/Stop.gd" type="Script" id=20]
 [ext_resource path="res://player/overlap/PlayerHurtbox.tscn" type="PackedScene" id=21]
 [ext_resource path="res://player/states/Die.gd" type="Script" id=22]
+[ext_resource path="res://player/scarf/scarf.tscn" type="PackedScene" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
@@ -588,10 +589,13 @@ position = Vector2( 0, 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
 shape = SubResource( 22 )
 
+[node name="scarf" parent="." instance=ExtResource( 23 )]
+z_index = -1
+
 [connection signal="target_changed" from="TargetFinder" to="." method="_on_TargetFinder_target_changed"]
-[connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
-[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="TargetFinder" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="StateMachine" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="AnimationPlayer" method="_on_StateMachine_transitioned"]
 [connection signal="transitioned" from="StateMachine" to="SpriteDistortionPlayer" method="_on_StateMachine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="ParticleSpawner" method="_on_StateMachine_transitioned"]
 [connection signal="area_entered" from="PlayerHurtbox" to="." method="_on_PlayerHurtbox_area_entered"]
