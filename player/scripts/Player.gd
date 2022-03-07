@@ -127,7 +127,7 @@ func check_is_on_ledge() -> bool:
 	return false
 	
 func activate_ledge_collision(value: bool) -> void:
-	ledge_collision.disabled = !value
+	ledge_collision.set_deferred("disabled", !value)
 	
 func _on_TargetFinder_target_changed(current_target):
 	hook = current_target
